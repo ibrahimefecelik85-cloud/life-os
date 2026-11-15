@@ -13,6 +13,7 @@ export function MonthGrid({
   selected,
   itemsByDay,
   onSelect,
+  compact = false,
 }: {
   days: ISODate[];
   month: Date;
@@ -20,7 +21,9 @@ export function MonthGrid({
   selected: ISODate;
   itemsByDay: Map<ISODate, CalendarItem[]>;
   onSelect: (d: ISODate) => void;
+  compact?: boolean; // Bugün ekranında daha kısa hücreler
 }) {
+  const maxTitles = compact ? 2 : 3;
   return (
     <div>
       <div className="mb-1 grid grid-cols-7 text-center text-[11px] font-medium text-zinc-500">
@@ -45,7 +48,7 @@ export function MonthGrid({
               onClick={() => onSelect(iso)}
               aria-label={`${format(date, "d")} – ${items.length} kayıt`}
               aria-pressed={isSelected}
-              className={`relative flex min-h-14 flex-col items-center gap-1 overflow-hidden rounded-xl border p-1 transition-colors sm:min-h-24 sm:items-stretch ${
+              className={`relative flex min-h-14 flex-col items-center gap-1 overflow-hidden rounded-xl border p-1 transition-colors sm:items-stretch ${compact ? "sm:min-h-16" : "sm:min-h-24"} ${
                 isSelected
                   ? "border-indigo-500 bg-indigo-500/10"
                   : "border-zinc-800/80 bg-zinc-900/60 hover:bg-zinc-900"
@@ -69,7 +72,7 @@ export function MonthGrid({
 
               {/* Geniş ekran: kısa başlıklar */}
               <span className="hidden w-full space-y-0.5 sm:block">
-                {items.slice(0, 3).map((i) => (
+                {items.slice(0, maxTitles).map((i) => (
                   <span
                     key={i.key}
                     className={`flex items-center gap-1 truncate text-left text-[10px] ${i.done ? "text-zinc-600 line-through" : "text-zinc-300"}`}
@@ -78,7 +81,9 @@ export function MonthGrid({
                     <span className="truncate">{i.title}</span>
                   </span>
                 ))}
-                {items.length > 3 && <span className="block text-[10px] text-zinc-500">+{items.length - 3} daha</span>}
+                {items.length > maxTitles && (
+                  <span className="block text-[10px] text-zinc-500">+{items.length - maxTitles} daha</span>
+                )}
               </span>
 
               {/* Sınav günü: altta kırmızı çizgi */}

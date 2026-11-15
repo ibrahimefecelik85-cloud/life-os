@@ -1,11 +1,15 @@
 "use client";
 // Ana ekran: "Bugün"
+// Telefonda tek sütun; bilgisayarda (lg ve üstü) iki sütun:
+//   sol: hava durumu + takvim   |   sağ: yapılacaklar, dersler, rutin, teslimler, antrenman
 import Link from "next/link";
-import { Settings } from "lucide-react";
+import { CalendarDays, Settings } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { Card } from "@/components/ui/Card";
 import { useNow } from "@/hooks/useNow";
 import { formatLong } from "@/lib/dates";
 import { WeatherCard } from "@/features/weather/WeatherCard";
+import { CalendarPanel } from "@/features/calendar/components/CalendarPanel";
 import { TodayClasses } from "@/features/today/TodayClasses";
 import { UpcomingCard } from "@/features/today/UpcomingCard";
 import { TodayTodos } from "@/features/today/TodayTodos";
@@ -37,16 +41,35 @@ export default function TodayPage() {
           </Link>
         }
       />
-      <div className="space-y-4">
-        <WeatherCard />
+
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-start">
+        {/* Sol sütun */}
+        <div className="space-y-4">
+          <WeatherCard />
+          {now && (
+            <Card
+              title="Takvim"
+              icon={<CalendarDays size={16} />}
+              action={
+                <Link href="/takvim" className="text-xs text-indigo-400">
+                  Tam ekran
+                </Link>
+              }
+            >
+              <CalendarPanel now={now} embedded />
+            </Card>
+          )}
+        </div>
+
+        {/* Sağ sütun */}
         {now && (
-          <>
+          <div className="space-y-4">
+            <TodayTodos now={now} />
             <TodayClasses now={now} />
             <HabitsCard now={now} />
             <UpcomingCard now={now} />
             <TodayWorkout />
-            <TodayTodos now={now} />
-          </>
+          </div>
         )}
       </div>
     </>

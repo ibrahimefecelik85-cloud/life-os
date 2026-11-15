@@ -1,5 +1,6 @@
 "use client";
 // Seçili günün detayı: o günkü tüm kayıtlar + hızlı ekleme butonları
+import type { ReactNode } from "react";
 import { parseISO } from "date-fns";
 import { CalendarPlus, ClipboardList, GraduationCap, ListTodo } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +11,11 @@ import { useSessions } from "@/features/courses/hooks";
 import type { ISODate } from "@/types";
 import type { CalendarItem } from "../hooks";
 
+/** Çerçevesiz bölüm (başka bir kartın içinde kullanılırken) */
+function PlainSection({ children }: { children: ReactNode }) {
+  return <div className="border-t border-zinc-800 pt-3">{children}</div>;
+}
+
 export type AddKind = "event" | "assessment" | "todo";
 
 export function DayDetails({
@@ -18,19 +24,23 @@ export function DayDetails({
   items,
   onOpen,
   onAdd,
+  plain = false,
 }: {
   date: ISODate;
   now: Date;
   items: CalendarItem[];
   onOpen: (item: CalendarItem) => void;
   onAdd: (kind: AddKind) => void;
+  plain?: boolean; // kart çerçevesi olmadan (başka bir kartın içindeyken)
 }) {
   const d = parseISO(date);
   const sessions = useSessions();
   const classCount = sessions?.filter((s) => s.weekday === weekdayOf(d)).length ?? 0;
 
+  const Wrapper = plain ? PlainSection : Card;
+
   return (
-    <Card>
+    <Wrapper>
       <header className="mb-2">
         <h2 className="font-semibold capitalize">{formatLong(d)}</h2>
         <p className="flex items-center gap-2 text-xs text-zinc-500">
@@ -77,6 +87,6 @@ export function DayDetails({
           <ListTodo size={14} /> Görev
         </Button>
       </div>
-    </Card>
+    </Wrapper>
   );
 }
