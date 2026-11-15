@@ -79,12 +79,12 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
           <ChevronLeft size={20} />
         </IconButton>
         <div className="text-center">
-          <p className="text-lg font-semibold capitalize">{format(month, "MMMM yyyy", { locale: tr })}</p>
-          <p className="text-xs text-zinc-500">
+          <p className="font-display text-xl font-semibold capitalize text-ink-50">{format(month, "MMMM yyyy", { locale: tr })}</p>
+          <p className="text-xs text-ink-500">
             {summary.length > 0 ? summary.map((s) => `${s.n} ${s.label}`).join(" · ") : "Bu ay boş"}
           </p>
           {monthOffset !== 0 && (
-            <button type="button" onClick={() => goToMonth(0)} className="mt-1 text-xs font-medium text-indigo-400">
+            <button type="button" onClick={() => goToMonth(0)} className="mt-1 text-xs font-medium text-brand-400">
               Bugüne dön
             </button>
           )}
@@ -97,7 +97,7 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
       <MonthGrid days={days} month={month} today={today} selected={selected} itemsByDay={itemsByDay} onSelect={setSelected} compact={embedded} />
 
       {!embedded && (
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-zinc-500">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-ink-500">
           <span className="flex items-center gap-1">
             <span className="h-2 w-2 rounded-full bg-sky-400" /> Ödev/sınav (ders rengi)
           </span>
@@ -108,7 +108,7 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
             <span className="h-2 w-2 rounded-full bg-fuchsia-400" /> Etkinlik
           </span>
           <span className="flex items-center gap-1">
-            <span className="h-2 w-2 rounded-full bg-zinc-400" /> Görev
+            <span className="h-2 w-2 rounded-full bg-ink-400" /> Görev
           </span>
         </div>
       )}

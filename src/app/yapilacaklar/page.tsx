@@ -51,7 +51,7 @@ export default function YapilacaklarPage() {
             {todos === undefined ? null : open.length === 0 ? (
               <EmptyState icon={<ListTodo size={28} />} text="Açık görev yok 🎉" />
             ) : (
-              <ul className="divide-y divide-zinc-800">
+              <ul className="divide-y divide-ink-800">
                 {open.map((t) => (
                   <TodoItem key={t.id} todo={t} now={now} showCategory={filter === "tumu"} onEdit={(item) => setEditing({ item })} />
                 ))}
@@ -63,7 +63,7 @@ export default function YapilacaklarPage() {
         {now && done.length > 0 && (
           <div>
             <div className="flex items-center justify-between">
-              <button type="button" onClick={() => setShowDone((s) => !s)} className="text-sm text-zinc-400 hover:text-zinc-200">
+              <button type="button" onClick={() => setShowDone((s) => !s)} className="text-sm text-ink-400 hover:text-ink-200">
                 {showDone ? "▾" : "▸"} Tamamlananlar ({done.length})
               </button>
               {showDone && (
@@ -73,7 +73,7 @@ export default function YapilacaklarPage() {
               )}
             </div>
             {showDone && (
-              <ul className="mt-2 divide-y divide-zinc-800 px-4">
+              <ul className="mt-2 divide-y divide-ink-800 px-4">
                 {done.map((t) => (
                   <TodoItem key={t.id} todo={t} now={now} showCategory={filter === "tumu"} onEdit={(item) => setEditing({ item })} />
                 ))}

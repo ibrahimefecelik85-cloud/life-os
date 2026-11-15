@@ -19,7 +19,7 @@ export function TodayClasses({ now }: { now: Date }) {
       title="Bugünkü dersler"
       icon={<GraduationCap size={16} />}
       action={
-        <Link href="/dersler" className="text-xs text-indigo-400">
+        <Link href="/dersler" className="text-xs text-brand-400">
           Program
         </Link>
       }
@@ -39,16 +39,16 @@ export function TodayClasses({ now }: { now: Date }) {
             return (
               <li
                 key={s.id}
-                className={`flex items-center gap-3 rounded-xl border p-3 ${live ? color.soft : "border-zinc-800"} ${past ? "opacity-40" : ""}`}
+                className={`flex items-center gap-3 rounded-xl border p-3 ${live ? color.soft : "border-ink-800"} ${past ? "opacity-40" : ""}`}
               >
                 <span className={`h-8 w-1 rounded-full ${color.dot}`} />
                 <div className="min-w-0 flex-1">
                   <p className="font-medium">
                     <span className={color.text}>{course?.code}</span>
-                    {s.kind !== "ders" && <span className="text-zinc-400"> · {SESSION_KIND_LABELS[s.kind]}</span>}
-                    {course?.name && <span className="text-sm font-normal text-zinc-400"> {course.name}</span>}
+                    {s.kind !== "ders" && <span className="text-ink-400"> · {SESSION_KIND_LABELS[s.kind]}</span>}
+                    {course?.name && <span className="text-sm font-normal text-ink-400"> {course.name}</span>}
                   </p>
-                  <p className="flex items-center gap-2 text-xs text-zinc-500">
+                  <p className="flex items-center gap-2 text-xs text-ink-500">
                     <span className="tabular-nums">
                       {s.start}–{s.end}
                     </span>
@@ -59,7 +59,7 @@ export function TodayClasses({ now }: { now: Date }) {
                     )}
                   </p>
                 </div>
-                {live && <span className="text-xs font-semibold text-emerald-400">Şimdi</span>}
+                {live && <span className="text-xs font-semibold text-brand-300">Şimdi</span>}
                 {!live && !past && startsIn <= 60 && <span className="text-xs text-amber-300">{startsIn} dk</span>}
               </li>
             );

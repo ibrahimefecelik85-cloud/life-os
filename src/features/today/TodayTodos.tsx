@@ -30,14 +30,14 @@ export function TodayTodos({ now }: { now: Date }) {
       title="Yapılacaklar"
       icon={<ListTodo size={16} />}
       action={
-        <Link href="/yapilacaklar" className="text-xs text-indigo-400">
+        <Link href="/yapilacaklar" className="text-xs text-brand-400">
           {list.length > 0 ? `${doneCount}/${list.length} · Tümü` : "Tümü"}
         </Link>
       }
     >
       {todos !== undefined && list.length === 0 && <EmptyState text="Bugün için görev yok." />}
       {list.length > 0 && (
-        <ul className="mb-2 divide-y divide-zinc-800">
+        <ul className="mb-2 divide-y divide-ink-800">
           {list.map((t) => (
             <TodoItem key={t.id} todo={t} now={now} onEdit={setEditing} />
           ))}

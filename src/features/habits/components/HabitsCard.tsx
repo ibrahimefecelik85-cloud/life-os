@@ -30,7 +30,7 @@ export function HabitsCard({ now }: { now: Date }) {
       title="Günlük rutin"
       icon={<Repeat size={16} />}
       action={
-        <Link href="/rutin" className="text-xs text-indigo-400">
+        <Link href="/rutin" className="text-xs text-brand-400">
           {todays.length > 0 ? `${doneCount}/${todays.length} · Düzenle` : "Düzenle"}
         </Link>
       }
@@ -39,14 +39,14 @@ export function HabitsCard({ now }: { now: Date }) {
         <EmptyState text="Bugün için rutin yok." />
       ) : (
         <>
-          <div className="mb-1 h-1.5 overflow-hidden rounded-full bg-zinc-800">
+          <div className="mb-1 h-1.5 overflow-hidden rounded-full bg-ink-800">
             <div
-              className={`h-full rounded-full transition-all ${pct === 100 ? "bg-emerald-500" : "bg-indigo-500"}`}
+              className={`h-full rounded-full transition-all ${pct === 100 ? "bg-brand-300" : "bg-brand-500"}`}
               style={{ width: `${pct}%` }}
             />
           </div>
-          {pct === 100 && <p className="mt-2 text-sm text-emerald-400">Bugünkü rutinin tamam 💪</p>}
-          <ul className="divide-y divide-zinc-800">
+          {pct === 100 && <p className="mt-2 text-sm text-brand-300">Bugünkü rutinin tamam 💪</p>}
+          <ul className="divide-y divide-ink-800">
             {sorted.map((h) => {
               const log = todayLogs.get(h.id);
               return (

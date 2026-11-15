@@ -34,7 +34,7 @@ export default function RutinPage() {
 
   return (
     <>
-      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-200">
+      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-ink-400 hover:text-ink-200">
         <ChevronLeft size={16} /> Bugün
       </Link>
       <PageHeader
@@ -53,11 +53,11 @@ export default function RutinPage() {
             const done = doneDates.get(h.id) ?? new Set<string>();
             const streak = computeStreak(h, done, now);
             return (
-              <li key={h.id} className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3">
+              <li key={h.id} className="rounded-2xl border border-ink-800 bg-ink-900/60 p-3">
                 <div className="flex items-start gap-2">
                   <button type="button" onClick={() => setEditing({ item: h })} className="min-w-0 flex-1 text-left">
                     <p className="font-medium">{h.title}</p>
-                    <p className="flex flex-wrap items-center gap-x-2 text-xs text-zinc-500">
+                    <p className="flex flex-wrap items-center gap-x-2 text-xs text-ink-500">
                       <span>{daysLabel(h)}</span>
                       {h.remindAt && (
                         <span className="flex items-center gap-0.5">
@@ -92,10 +92,10 @@ export default function RutinPage() {
                       <div key={iso} className="flex flex-1 flex-col items-center gap-1">
                         <div
                           className={`h-2 w-full rounded-full ${
-                            ok ? "bg-emerald-500" : scheduled ? "bg-zinc-800" : "border border-dashed border-zinc-800"
+                            ok ? "bg-brand-300" : scheduled ? "bg-ink-800" : "border border-dashed border-ink-800"
                           }`}
                         />
-                        <span className={`text-[10px] ${iso === today ? "text-zinc-300" : "text-zinc-600"}`}>
+                        <span className={`text-[10px] ${iso === today ? "text-ink-300" : "text-ink-600"}`}>
                           {format(d, "EEEEEE", { locale: tr })}
                         </span>
                       </div>

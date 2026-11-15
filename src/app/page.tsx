@@ -35,7 +35,7 @@ export default function TodayPage() {
           <Link
             href="/ayarlar"
             aria-label="Ayarlar"
-            className="flex h-10 w-10 items-center justify-center rounded-xl text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
+            className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-400 hover:bg-ink-800 hover:text-ink-100"
           >
             <Settings size={20} />
           </Link>
@@ -51,7 +51,7 @@ export default function TodayPage() {
               title="Takvim"
               icon={<CalendarDays size={16} />}
               action={
-                <Link href="/takvim" className="text-xs text-indigo-400">
+                <Link href="/takvim" className="text-xs text-brand-400">
                   Tam ekran
                 </Link>
               }

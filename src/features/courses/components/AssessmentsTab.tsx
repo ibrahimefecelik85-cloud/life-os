@@ -50,7 +50,7 @@ export function AssessmentsTab({ now }: { now: Date }) {
         {all === undefined ? null : list.length === 0 ? (
           <EmptyState icon={<ClipboardList size={28} />} text="Burada bir şey yok." />
         ) : (
-          <ul className="divide-y divide-zinc-800">
+          <ul className="divide-y divide-ink-800">
             {list.map((a) => (
               <AssessmentItem key={a.id} item={a} course={courseMap.get(a.courseId)} now={now} onEdit={(item) => setEditing({ item })} />
             ))}

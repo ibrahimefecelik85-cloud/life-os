@@ -26,7 +26,7 @@ export function MonthGrid({
   const maxTitles = compact ? 2 : 3;
   return (
     <div>
-      <div className="mb-1 grid grid-cols-7 text-center text-[11px] font-medium text-zinc-500">
+      <div className="mb-1 grid grid-cols-7 text-center text-[11px] font-medium text-ink-500">
         {WEEKDAYS.map((d) => (
           <span key={d.value}>{d.short}</span>
         ))}
@@ -50,13 +50,13 @@ export function MonthGrid({
               aria-pressed={isSelected}
               className={`relative flex min-h-14 flex-col items-center gap-1 overflow-hidden rounded-xl border p-1 transition-colors sm:items-stretch ${compact ? "sm:min-h-16" : "sm:min-h-24"} ${
                 isSelected
-                  ? "border-indigo-500 bg-indigo-500/10"
-                  : "border-zinc-800/80 bg-zinc-900/60 hover:bg-zinc-900"
+                  ? "border-brand-500 bg-brand-500/10"
+                  : "border-ink-800/80 bg-ink-900/60 hover:bg-ink-900"
               } ${inMonth ? "" : "opacity-35"}`}
             >
               <span
                 className={`flex h-6 w-6 items-center justify-center rounded-full text-xs tabular-nums sm:self-start ${
-                  isToday ? "bg-indigo-500 font-semibold text-white" : "text-zinc-300"
+                  isToday ? "bg-brand-500 font-semibold text-ink-50" : "text-ink-300"
                 }`}
               >
                 {format(date, "d")}
@@ -67,7 +67,7 @@ export function MonthGrid({
                 {visibleDots.map((i) => (
                   <span key={i.key} className={`h-1.5 w-1.5 rounded-full ${i.dot} ${i.done ? "opacity-30" : ""}`} />
                 ))}
-                {items.length > 4 && <span className="text-[9px] leading-none text-zinc-500">+{items.length - 4}</span>}
+                {items.length > 4 && <span className="text-[9px] leading-none text-ink-500">+{items.length - 4}</span>}
               </span>
 
               {/* Geniş ekran: kısa başlıklar */}
@@ -75,14 +75,14 @@ export function MonthGrid({
                 {items.slice(0, maxTitles).map((i) => (
                   <span
                     key={i.key}
-                    className={`flex items-center gap-1 truncate text-left text-[10px] ${i.done ? "text-zinc-600 line-through" : "text-zinc-300"}`}
+                    className={`flex items-center gap-1 truncate text-left text-[10px] ${i.done ? "text-ink-600 line-through" : "text-ink-300"}`}
                   >
                     <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${i.dot}`} />
                     <span className="truncate">{i.title}</span>
                   </span>
                 ))}
                 {items.length > maxTitles && (
-                  <span className="block text-[10px] text-zinc-500">+{items.length - maxTitles} daha</span>
+                  <span className="block text-[10px] text-ink-500">+{items.length - maxTitles} daha</span>
                 )}
               </span>
 

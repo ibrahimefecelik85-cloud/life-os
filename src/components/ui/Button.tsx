@@ -4,9 +4,9 @@ type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md";
 
 const VARIANTS: Record<Variant, string> = {
-  primary: "bg-indigo-500 text-white hover:bg-indigo-400",
-  secondary: "bg-zinc-800 text-zinc-100 hover:bg-zinc-700",
-  ghost: "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100",
+  primary: "bg-brand-500 text-ink-50 shadow-sm shadow-black/30 hover:bg-brand-600",
+  secondary: "bg-ink-800 text-ink-100 hover:bg-ink-700",
+  ghost: "text-ink-400 hover:bg-ink-800 hover:text-ink-100",
   danger: "bg-rose-500/15 text-rose-300 hover:bg-rose-500/25",
 };
 
@@ -35,7 +35,7 @@ export function IconButton({ className = "", ...props }: ButtonHTMLAttributes<HT
   return (
     <button
       type="button"
-      className={`inline-flex h-9 w-9 items-center justify-center rounded-xl text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100 ${className}`}
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-xl text-ink-400 transition-colors hover:bg-ink-800 hover:text-ink-100 ${className}`}
       {...props}
     />
   );

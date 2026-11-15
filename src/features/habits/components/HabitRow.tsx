@@ -27,9 +27,9 @@ export function HabitRow({
       <div className="flex items-center gap-3">
         <CheckCircle checked={done} onToggle={() => toggleHabit(habit, date)} label={`${habit.title} tamamlandı`} />
         <div className="min-w-0 flex-1">
-          <p className={`truncate ${done ? "text-zinc-500 line-through" : ""}`}>{habit.title}</p>
+          <p className={`truncate ${done ? "text-ink-500 line-through" : ""}`}>{habit.title}</p>
           {(habit.remindAt || target) && (
-            <p className="flex items-center gap-2 text-xs text-zinc-500">
+            <p className="flex items-center gap-2 text-xs text-ink-500">
               {habit.remindAt && (
                 <span className={`flex items-center gap-0.5 ${overdue ? "text-amber-300" : ""}`}>
                   <Bell size={11} /> {habit.remindAt}
@@ -53,9 +53,9 @@ export function HabitRow({
       {/* Dakika hedefi olanlar için ilerleme çubuğu ve +/- butonları */}
       {target && (
         <div className="mt-2 flex items-center gap-2 pl-9">
-          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-800">
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-800">
             <div
-              className={`h-full rounded-full transition-all ${done ? "bg-emerald-500" : "bg-indigo-500"}`}
+              className={`h-full rounded-full transition-all ${done ? "bg-brand-300" : "bg-brand-500"}`}
               style={{ width: `${Math.min(100, (minutes / target) * 100)}%` }}
             />
           </div>
@@ -63,14 +63,14 @@ export function HabitRow({
             type="button"
             onClick={() => addHabitMinutes(habit, date, -30)}
             disabled={minutes === 0}
-            className="h-7 rounded-lg bg-zinc-800 px-2 text-xs text-zinc-300 disabled:opacity-40"
+            className="h-7 rounded-lg bg-ink-800 px-2 text-xs text-ink-300 disabled:opacity-40"
           >
             −30
           </button>
           <button
             type="button"
             onClick={() => addHabitMinutes(habit, date, 30)}
-            className="h-7 rounded-lg bg-zinc-800 px-2 text-xs text-zinc-300"
+            className="h-7 rounded-lg bg-ink-800 px-2 text-xs text-ink-300"
           >
             +30 dk
           </button>

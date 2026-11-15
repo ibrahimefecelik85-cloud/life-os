@@ -54,7 +54,7 @@ export function HabitFormModal({ initial, onClose }: { initial?: Habit; onClose:
             <button
               type="button"
               onClick={() => setDays([])}
-              className={`h-9 rounded-lg px-3 text-sm ${everyDay ? "bg-indigo-500 text-white" : "bg-zinc-800 text-zinc-300"}`}
+              className={`h-9 rounded-lg px-3 text-sm ${everyDay ? "bg-brand-500 text-ink-50" : "bg-ink-800 text-ink-300"}`}
             >
               Her gün
             </button>
@@ -64,7 +64,7 @@ export function HabitFormModal({ initial, onClose }: { initial?: Habit; onClose:
                 type="button"
                 onClick={() => toggleDay(d.value)}
                 className={`h-9 w-11 rounded-lg text-sm ${
-                  !everyDay && days.includes(d.value) ? "bg-indigo-500 text-white" : "bg-zinc-800 text-zinc-300"
+                  !everyDay && days.includes(d.value) ? "bg-brand-500 text-ink-50" : "bg-ink-800 text-ink-300"
                 }`}
               >
                 {d.short}
@@ -81,7 +81,7 @@ export function HabitFormModal({ initial, onClose }: { initial?: Habit; onClose:
             <Input type="number" inputMode="numeric" min={0} step={15} value={target} onChange={(e) => setTarget(e.target.value)} placeholder="ör. 120" />
           </Field>
         </div>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-ink-500">
           Telefon bildirimleri uygulama telefona kurulduktan sonra (Aşama 3) çalışacak. Şimdilik saati geçen maddeler Bugün
           ekranında sarı görünür.
         </p>

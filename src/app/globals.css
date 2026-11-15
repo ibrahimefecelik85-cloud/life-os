@@ -1,17 +1,64 @@
 @import "tailwindcss";
 
+/*
+ * TEMA RENKLERİ — uygulamanın tüm renkleri buradan gelir.
+ * Rengi değiştirmek istersen sadece bu değerleri düzenle.
+ *   ink   : sıcak siyah → krem beyaz (arka plan, yazı, kenarlık)
+ *   brand : kahverengi / karamel (butonlar, vurgular)
+ * Kullanım: bg-ink-900, text-ink-100, bg-brand-500, text-brand-300 ...
+ */
+@theme {
+  --color-ink-50: #faf7f2;
+  --color-ink-100: #f3eee6;
+  --color-ink-200: #e4dccf;
+  --color-ink-300: #cfc4b4;
+  --color-ink-400: #a99d8c;
+  --color-ink-500: #857a6b;
+  --color-ink-600: #645b4f;
+  --color-ink-700: #4a4239;
+  --color-ink-800: #2b251f;
+  --color-ink-900: #1a1612;
+  --color-ink-950: #0f0c0a;
+
+  --color-brand-50: #fbf5ee;
+  --color-brand-100: #f3e4d0;
+  --color-brand-200: #e6c9a3;
+  --color-brand-300: #d9ae7e;
+  --color-brand-400: #c7925e;
+  --color-brand-500: #9a6a3a;
+  --color-brand-600: #7f5630;
+  --color-brand-700: #634224;
+  --color-brand-800: #4a311b;
+  --color-brand-900: #33220f;
+  --color-brand-950: #1f1408;
+}
+
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
 }
 
 html {
   color-scheme: dark;
-  background: #09090b;
+  background: var(--color-ink-950);
   -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  /* Üstte hafif sıcak bir ışık hüzmesi */
+  background:
+    radial-gradient(ellipse 80% 40% at 50% -10%, rgb(154 106 58 / 0.18), transparent 70%),
+    var(--color-ink-950);
+  background-attachment: fixed;
+}
+
+/* Seçili metin rengi */
+::selection {
+  background: rgb(154 106 58 / 0.45);
 }
 
 /* Tarih/saat seçicilerdeki takvim ikonunu koyu temada görünür yap */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.7);
+  filter: invert(0.75) sepia(0.4);
 }

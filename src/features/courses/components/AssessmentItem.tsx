@@ -24,12 +24,12 @@ export function AssessmentItem({
   const n = daysUntil(item.dueDate, now);
   // Tarih rengi: gecikmiş kırmızı, 2 gün içinde sarı
   const dueClass = item.done
-    ? "text-zinc-500"
+    ? "text-ink-500"
     : n < 0
       ? "text-rose-400"
       : n <= 2
         ? "text-amber-300"
-        : "text-zinc-400";
+        : "text-ink-400";
 
   return (
     <li className="flex items-start gap-3 py-2.5">
@@ -40,12 +40,12 @@ export function AssessmentItem({
         <div className="flex flex-wrap items-center gap-1.5">
           <span className={`h-2 w-2 rounded-full ${color.dot}`} />
           <span className={`text-xs font-semibold ${color.text}`}>{course?.code ?? "?"}</span>
-          <Badge className="bg-zinc-800 text-zinc-300">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
+          <Badge className="bg-ink-800 text-ink-300">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
           {item.priority !== "orta" && !item.done && (
             <Badge className={PRIORITY_STYLES[item.priority]}>{PRIORITY_LABELS[item.priority]}</Badge>
           )}
         </div>
-        <p className={`mt-0.5 truncate font-medium ${item.done ? "text-zinc-500 line-through" : ""}`}>{item.title}</p>
+        <p className={`mt-0.5 truncate font-medium ${item.done ? "text-ink-500 line-through" : ""}`}>{item.title}</p>
         <p className={`text-xs ${dueClass}`}>
           {showDate && `${formatShort(item.dueDate)} · `}
           {item.dueTime && `${item.dueTime} · `}

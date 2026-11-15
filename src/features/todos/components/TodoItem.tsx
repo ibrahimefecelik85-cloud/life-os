@@ -17,13 +17,13 @@ export function TodoItem({
   showCategory?: boolean;
 }) {
   const n = todo.dueDate ? daysUntil(todo.dueDate, now) : null;
-  const dueClass = n === null || todo.done ? "text-zinc-500" : n < 0 ? "text-rose-400" : n === 0 ? "text-amber-300" : "text-zinc-500";
+  const dueClass = n === null || todo.done ? "text-ink-500" : n < 0 ? "text-rose-400" : n === 0 ? "text-amber-300" : "text-ink-500";
 
   return (
     <li className="flex items-center gap-3 py-2.5">
       <CheckCircle checked={todo.done} onToggle={() => toggleTodo(todo)} label={`${todo.title} tamamlandı`} />
       <button type="button" onClick={() => onEdit(todo)} className="min-w-0 flex-1 text-left">
-        <p className={`truncate ${todo.done ? "text-zinc-500 line-through" : ""}`}>{todo.title}</p>
+        <p className={`truncate ${todo.done ? "text-ink-500 line-through" : ""}`}>{todo.title}</p>
         {(showCategory || todo.dueDate) && (
           <div className="mt-0.5 flex items-center gap-1.5">
             {showCategory && <Badge className={TODO_CATEGORY_STYLES[todo.category]}>{TODO_CATEGORY_LABELS[todo.category]}</Badge>}

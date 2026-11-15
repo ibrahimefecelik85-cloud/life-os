@@ -58,7 +58,7 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
           date: t.dueDate!,
           title: t.title,
           label: "Görev",
-          dot: "bg-zinc-400",
+          dot: "bg-ink-400",
           done: t.done,
           important: false,
         }),

@@ -24,14 +24,14 @@ export function QuickAddTodo({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-950 pl-3 focus-within:border-indigo-500">
-      <Plus size={18} className="shrink-0 text-zinc-500" />
+    <form onSubmit={handleSubmit} className="flex items-center gap-2 rounded-xl border border-ink-800 bg-ink-950 pl-3 focus-within:border-brand-500">
+      <Plus size={18} className="shrink-0 text-ink-500" />
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder={placeholder}
         enterKeyHint="done"
-        className="h-11 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-zinc-600"
+        className="h-11 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-ink-600"
       />
     </form>
   );
