@@ -8,6 +8,7 @@
 import Dexie, { type EntityTable, type Transaction } from "dexie";
 import type { Assessment, CalendarEvent, ClassSession, Course, Habit, HabitLog, Todo } from "@/types";
 import { newId } from "./id";
+import { seedFall2026 } from "./seed/fall2026";
 
 class LifeOSDB extends Dexie {
   courses!: EntityTable<Course, "id">;
@@ -43,23 +44,17 @@ class LifeOSDB extends Dexie {
       events: "id, date",
     });
 
+    // Sürüm 4: 2026 Güz ders programı ve ara sınavlar (tablo değişikliği yok, sadece veri)
+    this.version(4)
+      .stores({})
+      .upgrade((tx) => seedFall2026(tx));
+
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
-    this.on("populate", (tx) => {
-      seedCourses(tx);
-      seedHabits(tx);
+    this.on("populate", async (tx) => {
+      await seedFall2026(tx); // dersler + program + sınavlar
+      await seedHabits(tx);
     });
   }
-}
-
-function seedCourses(tx: Transaction) {
-  const now = Date.now();
-  const defaults: Course[] = [
-    { id: newId(), code: "CE 112", name: "Statik", color: "amber", createdAt: now },
-    { id: newId(), code: "MATH 104", color: "sky", createdAt: now + 1 },
-    { id: newId(), code: "BUS 101", name: "İşletmeye Giriş", color: "emerald", createdAt: now + 2 },
-    { id: newId(), code: "MATH 211", color: "violet", createdAt: now + 3 },
-  ];
-  return tx.table("courses").bulkAdd(defaults);
 }
 
 function seedHabits(tx: Transaction) {
