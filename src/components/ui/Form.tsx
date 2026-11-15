@@ -2,7 +2,7 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 const base =
-  "w-full rounded-xl border border-ink-800 bg-ink-950 px-3 text-base text-ink-100 placeholder:text-ink-600 outline-none focus:border-brand-500";
+  "w-full rounded-xl border border-ink-200 bg-white px-3 text-base text-ink-900 placeholder:text-ink-400 outline-none focus:border-ink-900";
 
 /**
  * Etiketli form alanı. Tek bir giriş kutusu için <label> kullanır (etikete dokununca kutu seçilir).
@@ -10,7 +10,7 @@ const base =
  * yoksa etikete dokunmak gruptaki ilk butona tıklamış gibi olur.
  */
 export function Field({ label, group, children }: { label: string; group?: boolean; children: ReactNode }) {
-  const caption = <span className="block text-xs font-medium text-ink-400">{label}</span>;
+  const caption = <span className="block text-xs font-medium text-ink-600">{label}</span>;
   if (group) {
     return (
       <div role="group" aria-label={label} className="space-y-1.5">
@@ -58,8 +58,8 @@ export function ChoiceGroup<T extends string>({
           onClick={() => onChange(o.value)}
           className={`h-9 rounded-lg px-3 text-sm transition-colors ${
             value === o.value
-              ? "bg-brand-500 text-ink-50"
-              : "bg-ink-800 text-ink-300 hover:bg-ink-700"
+              ? "bg-ink-900 text-white"
+              : "bg-ink-200 text-ink-700 hover:bg-ink-300"
           }`}
         >
           {o.label}

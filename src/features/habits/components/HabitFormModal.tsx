@@ -54,7 +54,7 @@ export function HabitFormModal({ initial, onClose }: { initial?: Habit; onClose:
             <button
               type="button"
               onClick={() => setDays([])}
-              className={`h-9 rounded-lg px-3 text-sm ${everyDay ? "bg-brand-500 text-ink-50" : "bg-ink-800 text-ink-300"}`}
+              className={`h-9 rounded-lg px-3 text-sm ${everyDay ? "bg-ink-900 text-white" : "bg-ink-200 text-ink-700"}`}
             >
               Her gün
             </button>
@@ -64,7 +64,7 @@ export function HabitFormModal({ initial, onClose }: { initial?: Habit; onClose:
                 type="button"
                 onClick={() => toggleDay(d.value)}
                 className={`h-9 w-11 rounded-lg text-sm ${
-                  !everyDay && days.includes(d.value) ? "bg-brand-500 text-ink-50" : "bg-ink-800 text-ink-300"
+                  !everyDay && days.includes(d.value) ? "bg-ink-900 text-white" : "bg-ink-200 text-ink-700"
                 }`}
               >
                 {d.short}

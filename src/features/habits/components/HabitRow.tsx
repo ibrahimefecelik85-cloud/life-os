@@ -31,7 +31,7 @@ export function HabitRow({
           {(habit.remindAt || target) && (
             <p className="flex items-center gap-2 text-xs text-ink-500">
               {habit.remindAt && (
-                <span className={`flex items-center gap-0.5 ${overdue ? "text-amber-300" : ""}`}>
+                <span className={`flex items-center gap-0.5 ${overdue ? "text-amber-700" : ""}`}>
                   <Bell size={11} /> {habit.remindAt}
                 </span>
               )}
@@ -44,7 +44,7 @@ export function HabitRow({
           )}
         </div>
         {streak > 0 && (
-          <span className="flex items-center gap-0.5 text-xs font-medium text-orange-300" title={`${streak} günlük seri`}>
+          <span className="flex items-center gap-0.5 text-xs font-medium text-orange-700" title={`${streak} günlük seri`}>
             <Flame size={14} /> {streak}
           </span>
         )}
@@ -53,9 +53,9 @@ export function HabitRow({
       {/* Dakika hedefi olanlar için ilerleme çubuğu ve +/- butonları */}
       {target && (
         <div className="mt-2 flex items-center gap-2 pl-9">
-          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-800">
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-200">
             <div
-              className={`h-full rounded-full transition-all ${done ? "bg-brand-300" : "bg-brand-500"}`}
+              className={`h-full rounded-full transition-all ${done ? "bg-brand-700" : "bg-brand-500"}`}
               style={{ width: `${Math.min(100, (minutes / target) * 100)}%` }}
             />
           </div>
@@ -63,14 +63,14 @@ export function HabitRow({
             type="button"
             onClick={() => addHabitMinutes(habit, date, -30)}
             disabled={minutes === 0}
-            className="h-7 rounded-lg bg-ink-800 px-2 text-xs text-ink-300 disabled:opacity-40"
+            className="h-7 rounded-lg bg-ink-200 px-2 text-xs text-ink-700 disabled:opacity-40"
           >
             −30
           </button>
           <button
             type="button"
             onClick={() => addHabitMinutes(habit, date, 30)}
-            className="h-7 rounded-lg bg-ink-800 px-2 text-xs text-ink-300"
+            className="h-7 rounded-lg bg-ink-200 px-2 text-xs text-ink-700"
           >
             +30 dk
           </button>

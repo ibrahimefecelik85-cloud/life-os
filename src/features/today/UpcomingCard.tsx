@@ -27,7 +27,7 @@ export function UpcomingCard({ now }: { now: Date }) {
       title="Yaklaşan teslim ve sınavlar"
       icon={<CalendarClock size={16} />}
       action={
-        <Link href="/dersler" className="text-xs text-brand-400">
+        <Link href="/dersler" className="text-xs text-brand-600">
           Tümü
         </Link>
       }
@@ -35,7 +35,7 @@ export function UpcomingCard({ now }: { now: Date }) {
       {loading ? null : list.length === 0 ? (
         <EmptyState text="Önümüzdeki 7 günde teslim yok." />
       ) : (
-        <ul className="divide-y divide-ink-800">
+        <ul className="divide-y divide-ink-200">
           {list.map((a) => (
             <AssessmentItem key={a.id} item={a} course={courseMap.get(a.courseId)} now={now} onEdit={setEditing} />
           ))}

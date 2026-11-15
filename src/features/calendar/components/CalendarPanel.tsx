@@ -79,12 +79,12 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
           <ChevronLeft size={20} />
         </IconButton>
         <div className="text-center">
-          <p className="font-display text-xl font-semibold capitalize text-ink-50">{format(month, "MMMM yyyy", { locale: tr })}</p>
+          <p className="font-display text-xl font-semibold capitalize text-ink-950">{format(month, "MMMM yyyy", { locale: tr })}</p>
           <p className="text-xs text-ink-500">
             {summary.length > 0 ? summary.map((s) => `${s.n} ${s.label}`).join(" · ") : "Bu ay boş"}
           </p>
           {monthOffset !== 0 && (
-            <button type="button" onClick={() => goToMonth(0)} className="mt-1 text-xs font-medium text-brand-400">
+            <button type="button" onClick={() => goToMonth(0)} className="mt-1 text-xs font-medium text-brand-600">
               Bugüne dön
             </button>
           )}
@@ -108,7 +108,7 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
             <span className="h-2 w-2 rounded-full bg-fuchsia-400" /> Etkinlik
           </span>
           <span className="flex items-center gap-1">
-            <span className="h-2 w-2 rounded-full bg-ink-400" /> Görev
+            <span className="h-2 w-2 rounded-full bg-ink-600" /> Görev
           </span>
         </div>
       )}

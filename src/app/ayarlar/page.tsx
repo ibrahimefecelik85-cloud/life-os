@@ -32,14 +32,14 @@ export default function AyarlarPage() {
 
   return (
     <>
-      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-ink-400 hover:text-ink-200">
+      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-ink-600 hover:text-ink-800">
         <ChevronLeft size={16} /> Bugün
       </Link>
       <PageHeader title="Ayarlar" />
 
       <div className="space-y-4">
         <Card title="Yedekleme">
-          <p className="mb-3 text-sm text-ink-400">
+          <p className="mb-3 text-sm text-ink-600">
             Verilerin sadece bu cihazın tarayıcısında saklanıyor. Tarayıcı verilerini silersen kaybolur, o yüzden ara sıra
             yedek al. Yedeği başka bir cihaza yükleyerek verilerini taşıyabilirsin.
           </p>
@@ -52,7 +52,7 @@ export default function AyarlarPage() {
             </Button>
             <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={(e) => handleImport(e.target.files?.[0])} />
           </div>
-          {message && <p className={`mt-3 text-sm ${message.ok ? "text-brand-300" : "text-rose-400"}`}>{message.text}</p>}
+          {message && <p className={`mt-3 text-sm ${message.ok ? "text-brand-700" : "text-rose-700"}`}>{message.text}</p>}
         </Card>
 
         <Card title="Tehlikeli bölge">

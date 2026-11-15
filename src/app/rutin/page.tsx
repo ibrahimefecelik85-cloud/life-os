@@ -34,7 +34,7 @@ export default function RutinPage() {
 
   return (
     <>
-      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-ink-400 hover:text-ink-200">
+      <Link href="/" className="mb-2 inline-flex items-center gap-1 text-sm text-ink-600 hover:text-ink-800">
         <ChevronLeft size={16} /> Bugün
       </Link>
       <PageHeader
@@ -53,7 +53,7 @@ export default function RutinPage() {
             const done = doneDates.get(h.id) ?? new Set<string>();
             const streak = computeStreak(h, done, now);
             return (
-              <li key={h.id} className="rounded-2xl border border-ink-800 bg-ink-900/60 p-3">
+              <li key={h.id} className="rounded-2xl border border-ink-200 bg-white shadow-soft p-3">
                 <div className="flex items-start gap-2">
                   <button type="button" onClick={() => setEditing({ item: h })} className="min-w-0 flex-1 text-left">
                     <p className="font-medium">{h.title}</p>
@@ -66,7 +66,7 @@ export default function RutinPage() {
                       )}
                       {h.targetMinutes && <span>{h.targetMinutes} dk</span>}
                       {streak > 0 && (
-                        <span className="flex items-center gap-0.5 text-orange-300">
+                        <span className="flex items-center gap-0.5 text-orange-700">
                           <Flame size={11} /> {streak} gün
                         </span>
                       )}
@@ -92,10 +92,10 @@ export default function RutinPage() {
                       <div key={iso} className="flex flex-1 flex-col items-center gap-1">
                         <div
                           className={`h-2 w-full rounded-full ${
-                            ok ? "bg-brand-300" : scheduled ? "bg-ink-800" : "border border-dashed border-ink-800"
+                            ok ? "bg-brand-700" : scheduled ? "bg-ink-200" : "border border-dashed border-ink-200"
                           }`}
                         />
-                        <span className={`text-[10px] ${iso === today ? "text-ink-300" : "text-ink-600"}`}>
+                        <span className={`text-[10px] ${iso === today ? "text-ink-700" : "text-ink-400"}`}>
                           {format(d, "EEEEEE", { locale: tr })}
                         </span>
                       </div>

@@ -17,7 +17,7 @@ export function TodoItem({
   showCategory?: boolean;
 }) {
   const n = todo.dueDate ? daysUntil(todo.dueDate, now) : null;
-  const dueClass = n === null || todo.done ? "text-ink-500" : n < 0 ? "text-rose-400" : n === 0 ? "text-amber-300" : "text-ink-500";
+  const dueClass = n === null || todo.done ? "text-ink-500" : n < 0 ? "text-rose-700" : n === 0 ? "text-amber-700" : "text-ink-500";
 
   return (
     <li className="flex items-center gap-3 py-2.5">

@@ -15,9 +15,9 @@ export const PRIORITY_LABELS: Record<Priority, string> = {
 };
 
 export const PRIORITY_STYLES: Record<Priority, string> = {
-  dusuk: "text-ink-400 bg-ink-400/10",
-  orta: "text-amber-300 bg-amber-400/10",
-  yuksek: "text-rose-300 bg-rose-400/10",
+  dusuk: "text-ink-600 bg-ink-600/10",
+  orta: "text-amber-700 bg-amber-400/10",
+  yuksek: "text-rose-700 bg-rose-400/10",
 };
 
 export const SESSION_KIND_LABELS: Record<SessionKind, string> = {
@@ -33,7 +33,7 @@ export const TODO_CATEGORY_LABELS: Record<TodoCategory, string> = {
 };
 
 export const TODO_CATEGORY_STYLES: Record<TodoCategory, string> = {
-  okul: "text-brand-200 bg-brand-500/20",
-  kulup: "text-ink-100 bg-ink-600/40",
-  kisisel: "text-amber-200 bg-amber-800/30",
+  okul: "text-brand-800 bg-brand-100",
+  kulup: "text-ink-800 bg-ink-200",
+  kisisel: "text-amber-800 bg-amber-100",
 };

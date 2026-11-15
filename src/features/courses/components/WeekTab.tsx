@@ -55,8 +55,8 @@ export function WeekTab({ now }: { now: Date }) {
       </div>
 
       {overdue && overdue.length > 0 && (
-        <Card title="Geciken" icon={<AlertTriangle size={16} className="text-rose-400" />}>
-          <ul className="divide-y divide-ink-800">
+        <Card title="Geciken" icon={<AlertTriangle size={16} className="text-rose-700" />}>
+          <ul className="divide-y divide-ink-200">
             {overdue.map((a) => (
               <AssessmentItem key={a.id} item={a} course={courseMap.get(a.courseId)} now={now} onEdit={(item) => setEditing({ item })} />
             ))}
@@ -70,12 +70,12 @@ export function WeekTab({ now }: { now: Date }) {
         const classCount = sessions?.filter((s) => s.weekday === i + 1).length ?? 0;
         const isToday = day === today;
         return (
-          <section key={day} className={`rounded-2xl border p-4 ${isToday ? "border-brand-500/50 bg-brand-500/5" : "border-ink-800 bg-ink-900/60"}`}>
+          <section key={day} className={`rounded-2xl border p-4 ${isToday ? "border-brand-500/50 bg-brand-500/5" : "border-ink-200 bg-white shadow-soft"}`}>
             <header className="flex items-center justify-between">
               <div>
                 <h3 className="font-semibold capitalize">
                   {format(parseISO(day), "EEEE", { locale: tr })}
-                  {isToday && <span className="ml-2 text-xs font-medium text-brand-400">Bugün</span>}
+                  {isToday && <span className="ml-2 text-xs font-medium text-brand-600">Bugün</span>}
                 </h3>
                 <p className="text-xs text-ink-500">
                   {format(parseISO(day), "d MMMM", { locale: tr })}
@@ -87,7 +87,7 @@ export function WeekTab({ now }: { now: Date }) {
               </IconButton>
             </header>
             {dayItems.length > 0 && (
-              <ul className="mt-1 divide-y divide-ink-800">
+              <ul className="mt-1 divide-y divide-ink-200">
                 {dayItems.map((a) => (
                   <AssessmentItem
                     key={a.id}
@@ -117,7 +117,7 @@ export function WeekTab({ now }: { now: Date }) {
 
 function Stat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-2xl border border-ink-800 bg-ink-900/60 py-3">
+    <div className="rounded-2xl border border-ink-200 bg-white shadow-soft py-3">
       <p className="text-2xl font-bold">{value}</p>
       <p className="text-[11px] text-ink-500">{label}</p>
     </div>

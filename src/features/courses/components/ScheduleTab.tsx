@@ -35,7 +35,7 @@ export function ScheduleTab({ now }: { now: Date }) {
               type="button"
               onClick={() => setDay(d.value)}
               className={`flex h-14 flex-col items-center justify-center rounded-xl text-sm transition-colors ${
-                day === d.value ? "bg-brand-500 text-ink-50" : "bg-ink-900 text-ink-400 hover:bg-ink-800"
+                day === d.value ? "bg-ink-900 text-white" : "border border-ink-200 bg-white text-ink-600 hover:bg-ink-100"
               }`}
             >
               <span className="font-medium">{d.short}</span>
@@ -60,16 +60,16 @@ export function ScheduleTab({ now }: { now: Date }) {
                     onClick={() => setEditing({ item: s })}
                     className={`flex w-full items-center gap-3 rounded-xl border p-3 text-left ${color.soft}`}
                   >
-                    <div className="w-14 shrink-0 text-xs tabular-nums text-ink-300">
+                    <div className="w-14 shrink-0 text-xs tabular-nums text-ink-700">
                       <p className="font-semibold">{s.start}</p>
                       <p className="text-ink-500">{s.end}</p>
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="flex items-center gap-1.5">
                         <span className={`font-semibold ${color.text}`}>{course?.code}</span>
-                        {s.kind !== "ders" && <Badge className="bg-ink-800 text-ink-300">{SESSION_KIND_LABELS[s.kind]}</Badge>}
+                        {s.kind !== "ders" && <Badge className="bg-ink-200 text-ink-700">{SESSION_KIND_LABELS[s.kind]}</Badge>}
                       </p>
-                      {course?.name && <p className="truncate text-sm text-ink-300">{course.name}</p>}
+                      {course?.name && <p className="truncate text-sm text-ink-700">{course.name}</p>}
                       {s.room && (
                         <p className="flex items-center gap-1 text-xs text-ink-500">
                           <MapPin size={12} /> {s.room}
@@ -103,7 +103,7 @@ export function ScheduleTab({ now }: { now: Date }) {
                     return (
                       <div key={s.id} className={`rounded-md border px-1 py-1 text-center ${color.soft}`}>
                         <p className={`truncate text-[10px] font-semibold ${color.text}`}>{course?.code}</p>
-                        <p className="text-[9px] tabular-nums text-ink-400">{s.start}</p>
+                        <p className="text-[9px] tabular-nums text-ink-600">{s.start}</p>
                       </div>
                     );
                   })}

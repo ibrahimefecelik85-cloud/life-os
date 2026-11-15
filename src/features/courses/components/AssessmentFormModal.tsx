@@ -97,7 +97,7 @@ export function AssessmentFormModal({
         <Field label="Not (isteğe bağlı)">
           <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Konular, sayfa numaraları..." />
         </Field>
-        {error && <p className="text-sm text-rose-400">{error}</p>}
+        {error && <p className="text-sm text-rose-700">{error}</p>}
         <div className="flex gap-2 pt-2">
           {initial && (
             <Button variant="danger" onClick={handleDelete} aria-label="Sil">

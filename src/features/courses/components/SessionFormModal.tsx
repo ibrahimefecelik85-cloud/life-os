@@ -84,7 +84,7 @@ export function SessionFormModal({
         <Field label="Derslik (isteğe bağlı)">
           <Input value={room} onChange={(e) => setRoom(e.target.value)} placeholder="AB1 245" />
         </Field>
-        {error && <p className="text-sm text-rose-400">{error}</p>}
+        {error && <p className="text-sm text-rose-700">{error}</p>}
         <div className="flex gap-2 pt-2">
           {initial && (
             <Button variant="danger" onClick={handleDelete} aria-label="Sil">

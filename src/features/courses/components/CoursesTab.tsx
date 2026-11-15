@@ -28,19 +28,19 @@ export function CoursesTab() {
             key={c.id}
             type="button"
             onClick={() => setEditing({ item: c })}
-            className="flex w-full items-center gap-3 rounded-2xl border border-ink-800 bg-ink-900/60 p-4 text-left hover:bg-ink-900"
+            className="flex w-full items-center gap-3 rounded-2xl border border-ink-200 bg-white shadow-soft p-4 text-left hover:bg-ink-100"
           >
             <span className={`h-10 w-1.5 rounded-full ${color.dot}`} />
             <div className="min-w-0 flex-1">
               <p className={`font-semibold ${color.text}`}>{c.code}</p>
-              <p className="truncate text-sm text-ink-300">{c.name ?? "Ders adı eklenmedi"}</p>
+              <p className="truncate text-sm text-ink-700">{c.name ?? "Ders adı eklenmedi"}</p>
               <p className="text-xs text-ink-500">
                 {mins > 0 ? `Haftada ${(mins / 60).toLocaleString("tr-TR", { maximumFractionDigits: 1 })} saat` : "Programa eklenmedi"}
                 {pending > 0 && ` · ${pending} bekleyen teslim`}
                 {c.instructor && ` · ${c.instructor}`}
               </p>
             </div>
-            <ChevronRight size={18} className="text-ink-600" />
+            <ChevronRight size={18} className="text-ink-400" />
           </button>
         );
       })}

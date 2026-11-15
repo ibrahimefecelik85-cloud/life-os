@@ -26,10 +26,10 @@ export function AssessmentItem({
   const dueClass = item.done
     ? "text-ink-500"
     : n < 0
-      ? "text-rose-400"
+      ? "text-rose-700"
       : n <= 2
-        ? "text-amber-300"
-        : "text-ink-400";
+        ? "text-amber-700"
+        : "text-ink-600";
 
   return (
     <li className="flex items-start gap-3 py-2.5">
@@ -40,7 +40,7 @@ export function AssessmentItem({
         <div className="flex flex-wrap items-center gap-1.5">
           <span className={`h-2 w-2 rounded-full ${color.dot}`} />
           <span className={`text-xs font-semibold ${color.text}`}>{course?.code ?? "?"}</span>
-          <Badge className="bg-ink-800 text-ink-300">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
+          <Badge className="bg-ink-200 text-ink-700">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
           {item.priority !== "orta" && !item.done && (
             <Badge className={PRIORITY_STYLES[item.priority]}>{PRIORITY_LABELS[item.priority]}</Badge>
           )}

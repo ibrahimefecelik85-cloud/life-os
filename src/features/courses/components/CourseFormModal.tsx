@@ -56,7 +56,7 @@ export function CourseFormModal({ initial, onClose }: { initial?: Course; onClos
                 aria-label={k}
                 onClick={() => setColor(k)}
                 className={`h-8 w-8 rounded-full ${COURSE_COLORS[k].dot} ${
-                  color === k ? "ring-2 ring-white ring-offset-2 ring-offset-ink-900" : ""
+                  color === k ? "ring-2 ring-white ring-offset-2 ring-offset-ink-100" : ""
                 }`}
               />
             ))}
