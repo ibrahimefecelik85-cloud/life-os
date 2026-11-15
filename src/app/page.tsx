@@ -10,6 +10,7 @@ import { TodayClasses } from "@/features/today/TodayClasses";
 import { UpcomingCard } from "@/features/today/UpcomingCard";
 import { TodayTodos } from "@/features/today/TodayTodos";
 import { TodayWorkout } from "@/features/today/TodayWorkout";
+import { HabitsCard } from "@/features/habits/components/HabitsCard";
 
 function greeting(h: number) {
   if (h < 5) return "İyi geceler";
@@ -41,6 +42,7 @@ export default function TodayPage() {
         {now && (
           <>
             <TodayClasses now={now} />
+            <HabitsCard now={now} />
             <UpcomingCard now={now} />
             <TodayWorkout />
             <TodayTodos now={now} />

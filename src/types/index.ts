@@ -51,6 +51,28 @@ export interface Assessment {
   createdAt: number;
 }
 
+// ---------- Günlük rutin ----------
+/** Her gün (veya seçili günlerde) tekrar eden alışkanlık */
+export interface Habit {
+  id: ID;
+  title: string;
+  order: number; // listedeki sıra
+  days: Weekday[]; // hangi günler (boş = her gün)
+  targetMinutes?: number; // ör. ders çalışma: 120 dk
+  remindAt?: TimeStr; // bildirim saati (Aşama 3'te kullanılacak)
+  createdAt: number;
+}
+
+/** Bir alışkanlığın belirli bir gündeki kaydı. id = `${habitId}_${date}` */
+export interface HabitLog {
+  id: string;
+  habitId: ID;
+  date: ISODate;
+  done: boolean;
+  minutes?: number;
+  completedAt?: number;
+}
+
 // ---------- Yapılacaklar ----------
 export type TodoCategory = "okul" | "kulup" | "kisisel";
 

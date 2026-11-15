@@ -27,8 +27,10 @@ export async function importData(file: File): Promise<void> {
   await db.transaction("rw", ALL_TABLES.map((n) => db.table(n)), async () => {
     for (const name of ALL_TABLES) {
       const rows = payload.tables[name];
+      // Eski yedeklerde olmayan tablolara (ör. rutin) dokunma
+      if (!Array.isArray(rows)) continue;
       await db.table(name).clear();
-      if (Array.isArray(rows)) await db.table(name).bulkAdd(rows);
+      await db.table(name).bulkAdd(rows);
     }
   });
 }

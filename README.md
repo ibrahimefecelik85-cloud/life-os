@@ -60,6 +60,6 @@ src/
 
 ## Yol haritası
 
-- [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme
+- [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin
 - [ ] **Aşama 2:** Antrenman (program, set/tekrar/ağırlık, ilerleme grafiği) ve Bütçe
-- [ ] **Aşama 3:** Kulüp, PWA (telefona yükleme), Vercel deploy
+- [ ] **Aşama 3:** Kulüp, PWA (telefona yükleme), rutin bildirimleri (iPhone), Vercel deploy
