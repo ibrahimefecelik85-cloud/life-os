@@ -30,7 +30,7 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" aria-label={title}>
       <div className="absolute inset-0 bg-ink-950/30 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative max-h-[90dvh] w-full overflow-y-auto rounded-t-3xl border border-ink-200 bg-white p-5 shadow-2xl pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:max-w-md sm:rounded-2xl">
+      <div className="relative max-h-[90dvh] w-full overflow-y-auto glass-strong rounded-t-3xl border p-5 shadow-2xl pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:max-w-md sm:rounded-2xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold">{title}</h2>
           <IconButton onClick={onClose} aria-label="Kapat">

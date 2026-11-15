@@ -6,7 +6,7 @@ export function ComingSoon({ title, icon, stage }: { title: string; icon: ReactN
   return (
     <>
       <PageHeader title={title} />
-      <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-ink-200 py-16 text-center text-ink-500">
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-ink-900/50 py-16 text-center text-ink-500">
         {icon}
         <p className="text-sm">Bu modül Aşama {stage}&apos;de eklenecek.</p>
       </div>

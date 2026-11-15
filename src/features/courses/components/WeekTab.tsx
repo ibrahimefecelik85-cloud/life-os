@@ -56,7 +56,7 @@ export function WeekTab({ now }: { now: Date }) {
 
       {overdue && overdue.length > 0 && (
         <Card title="Geciken" icon={<AlertTriangle size={16} className="text-rose-700" />}>
-          <ul className="divide-y divide-ink-200">
+          <ul className="divide-y divide-ink-900/15">
             {overdue.map((a) => (
               <AssessmentItem key={a.id} item={a} course={courseMap.get(a.courseId)} now={now} onEdit={(item) => setEditing({ item })} />
             ))}
@@ -70,7 +70,7 @@ export function WeekTab({ now }: { now: Date }) {
         const classCount = sessions?.filter((s) => s.weekday === i + 1).length ?? 0;
         const isToday = day === today;
         return (
-          <section key={day} className={`rounded-2xl border p-4 ${isToday ? "border-brand-500/50 bg-brand-500/5" : "border-ink-200 bg-white shadow-soft"}`}>
+          <section key={day} className={`glass rounded-2xl p-4 ${isToday ? "!border-brand-700 !bg-brand-300/25" : ""}`}>
             <header className="flex items-center justify-between">
               <div>
                 <h3 className="font-semibold capitalize">
@@ -87,7 +87,7 @@ export function WeekTab({ now }: { now: Date }) {
               </IconButton>
             </header>
             {dayItems.length > 0 && (
-              <ul className="mt-1 divide-y divide-ink-200">
+              <ul className="mt-1 divide-y divide-ink-900/15">
                 {dayItems.map((a) => (
                   <AssessmentItem
                     key={a.id}
@@ -117,7 +117,7 @@ export function WeekTab({ now }: { now: Date }) {
 
 function Stat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-2xl border border-ink-200 bg-white shadow-soft py-3">
+    <div className="glass rounded-2xl py-3">
       <p className="text-2xl font-bold">{value}</p>
       <p className="text-[11px] text-ink-500">{label}</p>
     </div>

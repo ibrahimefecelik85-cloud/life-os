@@ -35,7 +35,7 @@ export function UpcomingCard({ now }: { now: Date }) {
       {loading ? null : list.length === 0 ? (
         <EmptyState text="Önümüzdeki 7 günde teslim yok." />
       ) : (
-        <ul className="divide-y divide-ink-200">
+        <ul className="divide-y divide-ink-900/15">
           {list.map((a) => (
             <AssessmentItem key={a.id} item={a} course={courseMap.get(a.courseId)} now={now} onEdit={setEditing} />
           ))}

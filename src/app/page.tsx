@@ -35,7 +35,7 @@ export default function TodayPage() {
           <Link
             href="/ayarlar"
             aria-label="Ayarlar"
-            className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-600 hover:bg-ink-200 hover:text-ink-900"
+            className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-600 hover:bg-white/50 hover:text-ink-900"
           >
             <Settings size={20} />
           </Link>

@@ -13,7 +13,7 @@ import type { CalendarItem } from "../hooks";
 
 /** Çerçevesiz bölüm (başka bir kartın içinde kullanılırken) */
 function PlainSection({ children }: { children: ReactNode }) {
-  return <div className="border-t border-ink-200 pt-3">{children}</div>;
+  return <div className="border-t border-ink-900/50 pt-3">{children}</div>;
 }
 
 export type AddKind = "event" | "assessment" | "todo";
@@ -56,7 +56,7 @@ export function DayDetails({
       {items.length === 0 ? (
         <p className="py-3 text-sm text-ink-500">Bu gün için kayıt yok.</p>
       ) : (
-        <ul className="divide-y divide-ink-200">
+        <ul className="divide-y divide-ink-900/15">
           {items.map((i) => (
             <li key={i.key}>
               <button type="button" onClick={() => onOpen(i)} className="flex w-full items-center gap-3 py-2.5 text-left">

@@ -39,14 +39,14 @@ export function HabitsCard({ now }: { now: Date }) {
         <EmptyState text="Bugün için rutin yok." />
       ) : (
         <>
-          <div className="mb-1 h-1.5 overflow-hidden rounded-full bg-ink-200">
+          <div className="mb-1 h-1.5 overflow-hidden rounded-full bg-ink-900/10">
             <div
               className={`h-full rounded-full transition-all ${pct === 100 ? "bg-brand-700" : "bg-brand-500"}`}
               style={{ width: `${pct}%` }}
             />
           </div>
           {pct === 100 && <p className="mt-2 text-sm text-brand-700">Bugünkü rutinin tamam 💪</p>}
-          <ul className="divide-y divide-ink-200">
+          <ul className="divide-y divide-ink-900/15">
             {sorted.map((h) => {
               const log = todayLogs.get(h.id);
               return (

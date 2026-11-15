@@ -35,7 +35,7 @@ export function ScheduleTab({ now }: { now: Date }) {
               type="button"
               onClick={() => setDay(d.value)}
               className={`flex h-14 flex-col items-center justify-center rounded-xl text-sm transition-colors ${
-                day === d.value ? "bg-ink-900 text-white" : "border border-ink-200 bg-white text-ink-600 hover:bg-ink-100"
+                day === d.value ? "border border-ink-900 bg-brand-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)]" : "glass-soft text-ink-700 hover:bg-white/60"
               }`}
             >
               <span className="font-medium">{d.short}</span>
@@ -67,7 +67,7 @@ export function ScheduleTab({ now }: { now: Date }) {
                     <div className="min-w-0 flex-1">
                       <p className="flex items-center gap-1.5">
                         <span className={`font-semibold ${color.text}`}>{course?.code}</span>
-                        {s.kind !== "ders" && <Badge className="bg-ink-200 text-ink-700">{SESSION_KIND_LABELS[s.kind]}</Badge>}
+                        {s.kind !== "ders" && <Badge className="border border-ink-900/30 bg-white/50 text-ink-700">{SESSION_KIND_LABELS[s.kind]}</Badge>}
                       </p>
                       {course?.name && <p className="truncate text-sm text-ink-700">{course.name}</p>}
                       {s.room && (

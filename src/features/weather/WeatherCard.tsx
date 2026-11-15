@@ -9,10 +9,10 @@ export function WeatherCard() {
 
   if (!weather) {
     return (
-      <section className="flex h-28 items-center justify-between rounded-3xl bg-ink-900 p-5 text-sm text-ink-300">
+      <section className="flex h-28 items-center justify-between rounded-3xl p-5 text-sm border border-ink-900 bg-gradient-to-br from-brand-500/85 via-brand-700/85 to-brand-900/90 text-white backdrop-blur-xl shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_14px_34px_-18px_rgb(58_39_23/0.7)]">
         <span>{error ? `${error}.` : "Hava durumu yükleniyor..."}</span>
         {error && (
-          <IconButton onClick={refresh} aria-label="Yenile" className="text-ink-300 hover:!bg-white/10 hover:!text-white">
+          <IconButton onClick={refresh} aria-label="Yenile" className="text-brand-100 hover:!bg-white/15 hover:!text-white">
             <RefreshCw size={16} />
           </IconButton>
         )}
@@ -24,21 +24,21 @@ export function WeatherCard() {
   const r = Math.round;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-ink-900 via-ink-900 to-brand-900 p-5 text-white shadow-soft">
+    <section className="relative overflow-hidden rounded-3xl p-5 border border-ink-900 bg-gradient-to-br from-brand-500/85 via-brand-700/85 to-brand-900/90 text-white backdrop-blur-xl shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_14px_34px_-18px_rgb(58_39_23/0.7)]">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-brand-300">{LOCATION.name}</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-brand-100">{LOCATION.name}</p>
           <p className="mt-1 font-display text-6xl font-semibold tracking-tighter tabular-nums">{r(weather.temp)}°</p>
-          <p className="text-sm text-ink-300">{label}</p>
+          <p className="text-sm text-brand-50">{label}</p>
         </div>
         <div className="flex flex-col items-end gap-1">
-          <Icon size={44} strokeWidth={1.5} className="text-brand-300" />
-          <IconButton onClick={refresh} aria-label="Yenile" className="!h-7 !w-7 text-ink-400 hover:!bg-white/10 hover:!text-white">
+          <Icon size={44} strokeWidth={1.5} className="text-brand-100" />
+          <IconButton onClick={refresh} aria-label="Yenile" className="!h-7 !w-7 text-brand-100 hover:!bg-white/15 hover:!text-white">
             <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
           </IconButton>
         </div>
       </div>
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-white/10 pt-3 text-xs text-ink-300">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-white/25 pt-3 text-xs text-brand-50">
         <span>
           En yüksek {r(weather.max)}° · En düşük {r(weather.min)}°
         </span>

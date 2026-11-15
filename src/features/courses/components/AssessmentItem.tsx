@@ -40,7 +40,7 @@ export function AssessmentItem({
         <div className="flex flex-wrap items-center gap-1.5">
           <span className={`h-2 w-2 rounded-full ${color.dot}`} />
           <span className={`text-xs font-semibold ${color.text}`}>{course?.code ?? "?"}</span>
-          <Badge className="bg-ink-200 text-ink-700">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
+          <Badge className="border border-ink-900/30 bg-white/50 text-ink-700">{ASSESSMENT_TYPE_LABELS[item.type]}</Badge>
           {item.priority !== "orta" && !item.done && (
             <Badge className={PRIORITY_STYLES[item.priority]}>{PRIORITY_LABELS[item.priority]}</Badge>
           )}

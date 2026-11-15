@@ -28,7 +28,7 @@ export function CoursesTab() {
             key={c.id}
             type="button"
             onClick={() => setEditing({ item: c })}
-            className="flex w-full items-center gap-3 rounded-2xl border border-ink-200 bg-white shadow-soft p-4 text-left hover:bg-ink-100"
+            className="flex w-full items-center gap-3 glass rounded-2xl p-4 text-left hover:bg-ink-100"
           >
             <span className={`h-10 w-1.5 rounded-full ${color.dot}`} />
             <div className="min-w-0 flex-1">

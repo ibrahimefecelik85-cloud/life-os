@@ -51,7 +51,7 @@ export default function YapilacaklarPage() {
             {todos === undefined ? null : open.length === 0 ? (
               <EmptyState icon={<ListTodo size={28} />} text="Açık görev yok 🎉" />
             ) : (
-              <ul className="divide-y divide-ink-200">
+              <ul className="divide-y divide-ink-900/15">
                 {open.map((t) => (
                   <TodoItem key={t.id} todo={t} now={now} showCategory={filter === "tumu"} onEdit={(item) => setEditing({ item })} />
                 ))}
@@ -73,7 +73,7 @@ export default function YapilacaklarPage() {
               )}
             </div>
             {showDone && (
-              <ul className="mt-2 divide-y divide-ink-200 px-4">
+              <ul className="mt-2 divide-y divide-ink-900/15 px-4">
                 {done.map((t) => (
                   <TodoItem key={t.id} todo={t} now={now} showCategory={filter === "tumu"} onEdit={(item) => setEditing({ item })} />
                 ))}

@@ -24,7 +24,7 @@ export function QuickAddTodo({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 rounded-xl border border-ink-200 bg-white pl-3 focus-within:border-brand-500">
+    <form onSubmit={handleSubmit} className="flex items-center gap-2 rounded-xl border border-ink-900/45 bg-white/45 pl-3 focus-within:border-brand-500">
       <Plus size={18} className="shrink-0 text-ink-500" />
       <input
         value={title}

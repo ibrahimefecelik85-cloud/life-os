@@ -57,14 +57,14 @@ export function Tabs<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="mb-4 flex gap-1 rounded-2xl bg-ink-200/60 p-1">
+    <div className="mb-4 flex gap-1 glass-soft rounded-2xl p-1">
       {tabs.map((t) => (
         <button
           key={t.value}
           type="button"
           onClick={() => onChange(t.value)}
           className={`h-9 flex-1 rounded-lg text-sm font-medium transition-colors ${
-            value === t.value ? "bg-ink-200 text-ink-900" : "text-ink-500 hover:text-ink-700"
+            value === t.value ? "border border-ink-900 bg-brand-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)]" : "text-ink-500 hover:text-ink-700"
           }`}
         >
           {t.label}

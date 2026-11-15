@@ -53,7 +53,7 @@ export function HabitRow({
       {/* Dakika hedefi olanlar için ilerleme çubuğu ve +/- butonları */}
       {target && (
         <div className="mt-2 flex items-center gap-2 pl-9">
-          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-200">
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-900/10">
             <div
               className={`h-full rounded-full transition-all ${done ? "bg-brand-700" : "bg-brand-500"}`}
               style={{ width: `${Math.min(100, (minutes / target) * 100)}%` }}
@@ -63,14 +63,14 @@ export function HabitRow({
             type="button"
             onClick={() => addHabitMinutes(habit, date, -30)}
             disabled={minutes === 0}
-            className="h-7 rounded-lg bg-ink-200 px-2 text-xs text-ink-700 disabled:opacity-40"
+            className="glass-soft h-7 rounded-lg px-2 text-xs text-ink-800 disabled:opacity-40"
           >
             −30
           </button>
           <button
             type="button"
             onClick={() => addHabitMinutes(habit, date, 30)}
-            className="h-7 rounded-lg bg-ink-200 px-2 text-xs text-ink-700"
+            className="glass-soft h-7 rounded-lg px-2 text-xs text-ink-800"
           >
             +30 dk
           </button>

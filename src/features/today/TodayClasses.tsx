@@ -39,7 +39,7 @@ export function TodayClasses({ now }: { now: Date }) {
             return (
               <li
                 key={s.id}
-                className={`flex items-center gap-3 rounded-xl border p-3 ${live ? color.soft : "border-ink-200"} ${past ? "opacity-40" : ""}`}
+                className={`flex items-center gap-3 rounded-xl border p-3 ${live ? color.soft : "border-ink-900/50"} ${past ? "opacity-40" : ""}`}
               >
                 <span className={`h-8 w-1 rounded-full ${color.dot}`} />
                 <div className="min-w-0 flex-1">

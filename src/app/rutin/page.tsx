@@ -53,7 +53,7 @@ export default function RutinPage() {
             const done = doneDates.get(h.id) ?? new Set<string>();
             const streak = computeStreak(h, done, now);
             return (
-              <li key={h.id} className="rounded-2xl border border-ink-200 bg-white shadow-soft p-3">
+              <li key={h.id} className="glass rounded-2xl p-3">
                 <div className="flex items-start gap-2">
                   <button type="button" onClick={() => setEditing({ item: h })} className="min-w-0 flex-1 text-left">
                     <p className="font-medium">{h.title}</p>
@@ -92,7 +92,7 @@ export default function RutinPage() {
                       <div key={iso} className="flex flex-1 flex-col items-center gap-1">
                         <div
                           className={`h-2 w-full rounded-full ${
-                            ok ? "bg-brand-700" : scheduled ? "bg-ink-200" : "border border-dashed border-ink-200"
+                            ok ? "bg-brand-700" : scheduled ? "bg-ink-900/15" : "border border-dashed border-ink-900/30"
                           }`}
                         />
                         <span className={`text-[10px] ${iso === today ? "text-ink-700" : "text-ink-400"}`}>

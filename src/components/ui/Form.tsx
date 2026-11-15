@@ -2,7 +2,7 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 const base =
-  "w-full rounded-xl border border-ink-200 bg-white px-3 text-base text-ink-900 placeholder:text-ink-400 outline-none focus:border-ink-900";
+  "w-full rounded-xl border border-ink-900/45 bg-white/45 px-3 text-base text-ink-900 placeholder:text-ink-400 outline-none focus:border-ink-900 focus:bg-white/70";
 
 /**
  * Etiketli form alanı. Tek bir giriş kutusu için <label> kullanır (etikete dokununca kutu seçilir).
@@ -58,8 +58,8 @@ export function ChoiceGroup<T extends string>({
           onClick={() => onChange(o.value)}
           className={`h-9 rounded-lg px-3 text-sm transition-colors ${
             value === o.value
-              ? "bg-ink-900 text-white"
-              : "bg-ink-200 text-ink-700 hover:bg-ink-300"
+              ? "border border-ink-900 bg-brand-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)]"
+              : "glass-soft text-ink-800 hover:bg-white/60"
           }`}
         >
           {o.label}

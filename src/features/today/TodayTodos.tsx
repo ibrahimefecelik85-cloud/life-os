@@ -37,7 +37,7 @@ export function TodayTodos({ now }: { now: Date }) {
     >
       {todos !== undefined && list.length === 0 && <EmptyState text="Bugün için görev yok." />}
       {list.length > 0 && (
-        <ul className="mb-2 divide-y divide-ink-200">
+        <ul className="mb-2 divide-y divide-ink-900/15">
           {list.map((t) => (
             <TodoItem key={t.id} todo={t} now={now} onEdit={setEditing} />
           ))}

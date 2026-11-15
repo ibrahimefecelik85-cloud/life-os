@@ -51,7 +51,7 @@ export function MonthGrid({
               className={`relative flex min-h-14 flex-col items-center gap-1 overflow-hidden rounded-xl border p-1 transition-colors sm:items-stretch ${compact ? "sm:min-h-16" : "sm:min-h-24"} ${
                 isSelected
                   ? "border-brand-500 bg-brand-500/10"
-                  : "border-ink-200/80 bg-ink-50 hover:bg-ink-100"
+                  : "border-ink-900/25 bg-white/30 hover:bg-white/55"
               } ${inMonth ? "" : "opacity-35"}`}
             >
               <span
