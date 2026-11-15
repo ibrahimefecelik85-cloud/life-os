@@ -4,6 +4,7 @@
 //   sol: hava durumu + takvim   |   sağ: yapılacaklar, dersler, rutin, teslimler, antrenman
 import Link from "next/link";
 import { CalendarDays, Settings } from "lucide-react";
+import { Logo } from "@/components/layout/Logo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { useNow } from "@/hooks/useNow";
@@ -28,19 +29,21 @@ export default function TodayPage() {
 
   return (
     <>
-      <PageHeader
-        title={now ? greeting(now.getHours()) : "Bugün"}
-        subtitle={now ? formatLong(now) : " "}
-        action={
-          <Link
-            href="/ayarlar"
-            aria-label="Ayarlar"
-            className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-600 hover:bg-white/50 hover:text-ink-900"
-          >
-            <Settings size={20} />
-          </Link>
-        }
-      />
+      {/* Üst şerit: logo + uygulama adı, sağda ayarlar */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <Logo size={34} />
+          <span className="text-lg font-bold tracking-tight text-ink-950">Life OS</span>
+        </div>
+        <Link
+          href="/ayarlar"
+          aria-label="Ayarlar"
+          className="flex h-10 w-10 items-center justify-center rounded-xl text-ink-600 hover:bg-white/50 hover:text-ink-900"
+        >
+          <Settings size={20} />
+        </Link>
+      </div>
+      <PageHeader title={now ? greeting(now.getHours()) : "Bugün"} subtitle={now ? formatLong(now) : "\u00a0"} />
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-start">
         {/* Sol sütun */}
