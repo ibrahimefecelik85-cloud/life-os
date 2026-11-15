@@ -5,7 +5,7 @@ import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
 import { ChoiceGroup, Field, Input } from "@/components/ui/Form";
 import { TODO_CATEGORY_LABELS } from "@/lib/labels";
-import type { Todo, TodoCategory } from "@/types";
+import type { ISODate, Todo, TodoCategory } from "@/types";
 import { addTodo, deleteTodo, updateTodo } from "../api";
 
 export const CATEGORY_OPTIONS = (Object.keys(TODO_CATEGORY_LABELS) as TodoCategory[]).map((k) => ({
@@ -16,15 +16,17 @@ export const CATEGORY_OPTIONS = (Object.keys(TODO_CATEGORY_LABELS) as TodoCatego
 export function TodoFormModal({
   initial,
   defaultCategory = "kisisel",
+  defaultDate,
   onClose,
 }: {
   initial?: Todo;
   defaultCategory?: TodoCategory;
+  defaultDate?: ISODate;
   onClose: () => void;
 }) {
   const [title, setTitle] = useState(initial?.title ?? "");
   const [category, setCategory] = useState<TodoCategory>(initial?.category ?? defaultCategory);
-  const [dueDate, setDueDate] = useState(initial?.dueDate ?? "");
+  const [dueDate, setDueDate] = useState(initial?.dueDate ?? defaultDate ?? "");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

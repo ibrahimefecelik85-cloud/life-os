@@ -6,7 +6,7 @@
 // Not: IndexedDB true/false değerlerini indeksleyemez, o yüzden "done" alanlarını
 // indekse koymuyoruz; filtrelemeyi JavaScript'te yapıyoruz (veri küçük, sorun değil).
 import Dexie, { type EntityTable, type Transaction } from "dexie";
-import type { Assessment, ClassSession, Course, Habit, HabitLog, Todo } from "@/types";
+import type { Assessment, CalendarEvent, ClassSession, Course, Habit, HabitLog, Todo } from "@/types";
 import { newId } from "./id";
 
 class LifeOSDB extends Dexie {
@@ -16,6 +16,7 @@ class LifeOSDB extends Dexie {
   todos!: EntityTable<Todo, "id">;
   habits!: EntityTable<Habit, "id">;
   habitLogs!: EntityTable<HabitLog, "id">;
+  events!: EntityTable<CalendarEvent, "id">;
 
   constructor() {
     super("life-os");
@@ -36,6 +37,11 @@ class LifeOSDB extends Dexie {
       })
       // Uygulamayı zaten kullananlar için: rutin listesini ekle
       .upgrade((tx) => seedHabits(tx));
+
+    // Sürüm 3: takvim etkinlikleri
+    this.version(3).stores({
+      events: "id, date",
+    });
 
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
     this.on("populate", (tx) => {
@@ -81,4 +87,4 @@ function seedHabits(tx: Transaction) {
 export const db = new LifeOSDB();
 
 /** Yedekleme için tüm tabloların listesi */
-export const ALL_TABLES = ["courses", "classSessions", "assessments", "todos", "habits", "habitLogs"] as const;
+export const ALL_TABLES = ["courses", "classSessions", "assessments", "todos", "habits", "habitLogs", "events"] as const;

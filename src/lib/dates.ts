@@ -45,6 +45,15 @@ export function relativeLabel(iso: ISODate, from: Date = new Date()): string {
   return `${n} gün kaldı`;
 }
 
+/** Takvim için: "Bugün", "Yarın", "Dün", "3 gün sonra", "2 gün önce" */
+export function relativeDay(iso: ISODate, from: Date = new Date()): string {
+  const n = daysUntil(iso, from);
+  if (n === 0) return "Bugün";
+  if (n === 1) return "Yarın";
+  if (n === -1) return "Dün";
+  return n < 0 ? `${-n} gün önce` : `${n} gün sonra`;
+}
+
 /** Verilen tarihin içinde bulunduğu haftanın (Pzt–Paz) günleri */
 export function weekDays(d: Date): ISODate[] {
   const start = startOfISOWeek(d);

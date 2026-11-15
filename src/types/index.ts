@@ -73,6 +73,17 @@ export interface HabitLog {
   completedAt?: number;
 }
 
+// ---------- Takvim ----------
+/** Ödev/görev olmayan genel etkinlik (maç, doğum günü, randevu...) */
+export interface CalendarEvent {
+  id: ID;
+  title: string;
+  date: ISODate;
+  time?: TimeStr;
+  note?: string;
+  createdAt: number;
+}
+
 // ---------- Yapılacaklar ----------
 export type TodoCategory = "okul" | "kulup" | "kisisel";
 

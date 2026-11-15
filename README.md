@@ -32,6 +32,8 @@ src/
 ├── app/                 # Sayfalar (her klasör = bir URL)
 │   ├── page.tsx         #   /              Bugün
 │   ├── dersler/         #   /dersler
+│   ├── takvim/          #   /takvim        Aylık takvim
+│   ├── rutin/           #   /rutin         Günlük rutin yönetimi
 │   ├── yapilacaklar/    #   /yapilacaklar
 │   ├── antrenman/       #   /antrenman     (Aşama 2)
 │   ├── butce/           #   /butce         (Aşama 2)
@@ -60,6 +62,6 @@ src/
 
 ## Yol haritası
 
-- [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin
+- [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin, aylık takvim
 - [ ] **Aşama 2:** Antrenman (program, set/tekrar/ağırlık, ilerleme grafiği) ve Bütçe
 - [ ] **Aşama 3:** Kulüp, PWA (telefona yükleme), rutin bildirimleri (iPhone), Vercel deploy
