@@ -5,13 +5,18 @@ import { GraduationCap, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/misc";
 import { courseColor } from "@/lib/colors";
-import { timeToMinutes, weekdayOf } from "@/lib/dates";
+import { timeToMinutes, toISODate, weekdayOf } from "@/lib/dates";
+import { isSessionActive, useSemesterEnd } from "@/features/courses/semester";
 import { SESSION_KIND_LABELS } from "@/lib/labels";
 import { useCourseMap, useSessionsForDay } from "@/features/courses/hooks";
 
 export function TodayClasses({ now }: { now: Date }) {
-  const sessions = useSessionsForDay(weekdayOf(now));
+  const allSessions = useSessionsForDay(weekdayOf(now));
   const courseMap = useCourseMap();
+  const semesterEnd = useSemesterEnd();
+  // Dönem bittiyse okul derslerini gizle (aktiviteler, ör. Wolves, kalır)
+  const today = toISODate(now);
+  const sessions = allSessions?.filter((s) => isSessionActive(courseMap.get(s.courseId), today, semesterEnd));
   const nowMin = now.getHours() * 60 + now.getMinutes();
 
   return (

@@ -8,6 +8,7 @@ import { eachDayOfInterval, parseISO } from "date-fns";
 import { db } from "@/lib/db";
 import { courseColor } from "@/lib/colors";
 import { toISODate, weekdayOf } from "@/lib/dates";
+import { isSessionActive, SEMESTER_END_KEY } from "@/features/courses/semester";
 import { ASSESSMENT_TYPE_LABELS, CLUB_EVENT_LABELS, SESSION_KIND_LABELS } from "@/lib/labels";
 import type { Assessment, CalendarEvent, ClassSession, ClubEvent, ISODate, Todo } from "@/types";
 
@@ -32,14 +33,16 @@ export type CalendarItem = {
 
 export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | undefined {
   return useLiveQuery(async () => {
-    const [assessments, todos, events, courses, sessions, clubEvents] = await Promise.all([
+    const [assessments, todos, events, courses, sessions, clubEvents, semEndRow] = await Promise.all([
       db.assessments.where("dueDate").between(from, to, true, true).toArray(),
       db.todos.where("dueDate").between(from, to, true, true).toArray(),
       db.events.where("date").between(from, to, true, true).toArray(),
       db.courses.toArray(),
       db.classSessions.toArray(),
       db.clubEvents.where("date").between(from, to, true, true).toArray(),
+      db.settings.get(SEMESTER_END_KEY),
     ]);
+    const semesterEnd = typeof semEndRow?.value === "string" ? semEndRow.value : null;
     const courseMap = new Map(courses.map((c) => [c.id, c]));
 
     const items: CalendarItem[] = [
@@ -113,6 +116,7 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
       const date = toISODate(day);
       for (const s of byWeekday.get(weekdayOf(day)) ?? []) {
         const course = courseMap.get(s.courseId);
+        if (!isSessionActive(course, date, semesterEnd)) continue; // dönem bittiyse dersi gösterme
         items.push({
           key: `s-${s.id}-${date}`,
           source: "session",

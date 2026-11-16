@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { toISODate, weekDays } from "@/lib/dates";
 import type { Assessment, ISODate } from "@/types";
 import { useAssessmentsBetween, useCourseMap, useOverdueAssessments, useSessions } from "../hooks";
+import { isSessionActive, useSemesterEnd } from "../semester";
 import { AssessmentFormModal } from "./AssessmentFormModal";
 import { AssessmentItem } from "./AssessmentItem";
 
@@ -23,7 +24,11 @@ export function WeekTab({ now }: { now: Date }) {
   const items = useAssessmentsBetween(days[0], days[6]);
   const overdue = useOverdueAssessments(offset === 0 ? days[0] : null);
   const sessions = useSessions();
+  const semesterEnd = useSemesterEnd();
   const courseMap = useCourseMap();
+  // Gösterilen haftanın her günü için o gün geçerli ders saatleri (dönem sonu dikkate alınır)
+  const sessionsOn = (day: string, weekday: number) =>
+    (sessions ?? []).filter((s) => s.weekday === weekday && isSessionActive(courseMap.get(s.courseId), day, semesterEnd));
 
   const pending = items?.filter((a) => !a.done) ?? [];
   const examCount = pending.filter((a) => a.type === "sinav" || a.type === "quiz").length;
@@ -51,7 +56,7 @@ export function WeekTab({ now }: { now: Date }) {
       <div className="grid grid-cols-3 gap-2 text-center">
         <Stat value={pending.length} label="bekleyen" />
         <Stat value={examCount} label="sınav / quiz" />
-        <Stat value={sessions?.length ?? 0} label="ders saati" />
+        <Stat value={days.reduce((n, d, i) => n + sessionsOn(d, i + 1).length, 0)} label="ders saati" />
       </div>
 
       {overdue && overdue.length > 0 && (
@@ -67,7 +72,7 @@ export function WeekTab({ now }: { now: Date }) {
       {/* Günler */}
       {days.map((day, i) => {
         const dayItems = items?.filter((a) => a.dueDate === day) ?? [];
-        const classCount = sessions?.filter((s) => s.weekday === i + 1).length ?? 0;
+        const classCount = sessionsOn(day, i + 1).length;
         const isToday = day === today;
         return (
           <section key={day} className={`glass rounded-2xl p-4 ${isToday ? "!border-brand-700 !bg-brand-300/25" : ""}`}>

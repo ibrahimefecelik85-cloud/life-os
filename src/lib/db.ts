@@ -89,14 +89,26 @@ class LifeOSDB extends Dexie {
       clubNotes: "id, date",
     });
 
+    // Sürüm 8: 2026 Güz dönemi bitişi (31 Aralık) — sonrasında dersler gösterilmez
+    this.version(8)
+      .stores({})
+      .upgrade((tx) => seedSemesterEnd(tx));
+
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
     this.on("populate", async (tx) => {
       await seedFall2026(tx); // dersler + program + sınavlar
       await seedWolves(tx);
       await seedHabits(tx);
       await seedBudgetCategories(tx);
+      await seedSemesterEnd(tx);
     });
   }
+}
+
+/** Dönem bitişi henüz ayarlanmadıysa 31 Aralık 2026 yap */
+async function seedSemesterEnd(tx: Transaction) {
+  const settings = tx.table("settings");
+  if (!(await settings.get("semester.end"))) await settings.put({ key: "semester.end", value: "2026-12-31" });
 }
 
 function seedHabits(tx: Transaction) {

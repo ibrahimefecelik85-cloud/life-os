@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/misc";
 import { formatLong, relativeDay, weekdayOf } from "@/lib/dates";
-import { useSessions } from "@/features/courses/hooks";
+import { useCourseMap, useSessions } from "@/features/courses/hooks";
+import { isSessionActive, useSemesterEnd } from "@/features/courses/semester";
 import type { ISODate } from "@/types";
 import type { CalendarItem } from "../hooks";
 
@@ -35,7 +36,10 @@ export function DayDetails({
 }) {
   const d = parseISO(date);
   const sessions = useSessions();
-  const classCount = sessions?.filter((s) => s.weekday === weekdayOf(d)).length ?? 0;
+  const courseMap = useCourseMap();
+  const semesterEnd = useSemesterEnd();
+  const classCount =
+    sessions?.filter((s) => s.weekday === weekdayOf(d) && isSessionActive(courseMap.get(s.courseId), date, semesterEnd)).length ?? 0;
 
   const Wrapper = plain ? PlainSection : Card;
 

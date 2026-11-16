@@ -10,6 +10,7 @@ import { WEEKDAYS, weekdayOf } from "@/lib/dates";
 import { SESSION_KIND_LABELS } from "@/lib/labels";
 import type { ClassSession, Weekday } from "@/types";
 import { useCourseMap, useSessions } from "../hooks";
+import { SemesterEndCard } from "./SemesterEndCard";
 import { SessionFormModal } from "./SessionFormModal";
 
 export function ScheduleTab({ now }: { now: Date }) {
@@ -87,6 +88,8 @@ export function ScheduleTab({ now }: { now: Date }) {
       <Button className="w-full" onClick={() => setEditing({})}>
         <Plus size={18} /> Ders saati ekle
       </Button>
+
+      <SemesterEndCard now={now} />
 
       {/* Haftanın kısa özeti */}
       {sessions && sessions.length > 0 && (
