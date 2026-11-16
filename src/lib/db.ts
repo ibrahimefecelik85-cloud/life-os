@@ -10,6 +10,8 @@ import type {
   Assessment,
   CalendarEvent,
   ClassSession,
+  ClubEvent,
+  ClubNote,
   Course,
   Expense,
   ExpenseCategory,
@@ -34,6 +36,8 @@ class LifeOSDB extends Dexie {
   expenses!: EntityTable<Expense, "id">;
   expenseCategories!: EntityTable<ExpenseCategory, "id">;
   settings!: EntityTable<Setting, "key">;
+  clubEvents!: EntityTable<ClubEvent, "id">;
+  clubNotes!: EntityTable<ClubNote, "id">;
 
   constructor() {
     super("life-os");
@@ -78,6 +82,12 @@ class LifeOSDB extends Dexie {
         settings: "key",
       })
       .upgrade((tx) => seedBudgetCategories(tx));
+
+    // Sürüm 7: kulüp etkinlikleri ve gelişmeler
+    this.version(7).stores({
+      clubEvents: "id, date",
+      clubNotes: "id, date",
+    });
 
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
     this.on("populate", async (tx) => {
@@ -125,4 +135,6 @@ export const ALL_TABLES = [
   "expenses",
   "expenseCategories",
   "settings",
+  "clubEvents",
+  "clubNotes",
 ] as const;

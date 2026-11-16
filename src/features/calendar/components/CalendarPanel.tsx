@@ -9,8 +9,9 @@ import { IconButton } from "@/components/ui/Button";
 import { toISODate } from "@/lib/dates";
 import { AssessmentFormModal } from "@/features/courses/components/AssessmentFormModal";
 import { SessionFormModal } from "@/features/courses/components/SessionFormModal";
+import { ClubEventFormModal } from "@/features/club/components/ClubEventFormModal";
 import { TodoFormModal } from "@/features/todos/components/TodoFormModal";
-import type { Assessment, CalendarEvent, ClassSession, ISODate, Todo } from "@/types";
+import type { Assessment, CalendarEvent, ClassSession, ClubEvent, ISODate, Todo } from "@/types";
 import { useCalendarItems, type CalendarItem } from "../hooks";
 import { DayDetails } from "./DayDetails";
 import { EventFormModal } from "./EventFormModal";
@@ -21,6 +22,7 @@ type Editing =
   | { kind: "assessment"; item?: Assessment }
   | { kind: "todo"; item?: Todo }
   | { kind: "session"; item: ClassSession }
+  | { kind: "club"; item?: ClubEvent }
   | null;
 
 // "Dersler/idman göster" tercihi bu tarayıcıda hatırlanır
@@ -92,6 +94,7 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
     if (i.source === "assessment") setEditing({ kind: "assessment", item: i.item });
     if (i.source === "todo") setEditing({ kind: "todo", item: i.item });
     if (i.source === "session") setEditing({ kind: "session", item: i.item });
+    if (i.source === "club") setEditing({ kind: "club", item: i.item });
   }
 
   const close = () => setEditing(null);
@@ -146,6 +149,9 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
             <span className="h-2 w-2 rounded-full bg-ink-600" /> Görev
           </span>
           <span className="flex items-center gap-1">
+            <span className="h-2 w-2 rounded-full bg-ink-900" /> Kulüp
+          </span>
+          <span className="flex items-center gap-1">
             <span className="h-1.5 w-1.5 rounded-full bg-ink-600 opacity-50" /> Soluk: ders/idman
           </span>
         </div>
@@ -164,6 +170,7 @@ export function CalendarPanel({ now, embedded = false }: { now: Date; embedded?:
       {editing?.kind === "assessment" && <AssessmentFormModal initial={editing.item} defaultDate={selected} onClose={close} />}
       {editing?.kind === "todo" && <TodoFormModal initial={editing.item} defaultDate={selected} onClose={close} />}
       {editing?.kind === "session" && <SessionFormModal initial={editing.item} onClose={close} />}
+      {editing?.kind === "club" && <ClubEventFormModal initial={editing.item} defaultDate={selected} onClose={close} />}
     </div>
   );
 }

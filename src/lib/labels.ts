@@ -1,5 +1,5 @@
 // Koddaki değerlerin (ör. "sinav") ekranda görünen Türkçe karşılıkları.
-import type { AssessmentType, Priority, SessionKind, TodoCategory } from "@/types";
+import type { AssessmentType, ClubEventType, ClubNoteTag, Priority, SessionKind, TodoCategory } from "@/types";
 
 export const ASSESSMENT_TYPE_LABELS: Record<AssessmentType, string> = {
   odev: "Ödev",
@@ -25,6 +25,28 @@ export const SESSION_KIND_LABELS: Record<SessionKind, string> = {
   ps: "PS",
   lab: "Lab",
   idman: "İdman",
+};
+
+export const CLUB_EVENT_LABELS: Record<ClubEventType, string> = {
+  etkinlik: "Etkinlik",
+  turnuva: "Turnuva",
+  toplanti: "Toplantı",
+  antrenman: "Antrenman",
+  diger: "Diğer",
+};
+
+export const CLUB_NOTE_LABELS: Record<ClubNoteTag, string> = {
+  duyuru: "Duyuru",
+  karar: "Karar",
+  not: "Not",
+  sorun: "Sorun",
+};
+
+export const CLUB_NOTE_STYLES: Record<ClubNoteTag, string> = {
+  duyuru: "text-brand-800 bg-brand-100",
+  karar: "text-ink-50 bg-ink-800",
+  not: "text-ink-700 bg-ink-200",
+  sorun: "text-rose-700 bg-rose-100",
 };
 
 export const TODO_CATEGORY_LABELS: Record<TodoCategory, string> = {

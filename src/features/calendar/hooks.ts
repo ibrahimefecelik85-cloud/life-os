@@ -8,8 +8,8 @@ import { eachDayOfInterval, parseISO } from "date-fns";
 import { db } from "@/lib/db";
 import { courseColor } from "@/lib/colors";
 import { toISODate, weekdayOf } from "@/lib/dates";
-import { ASSESSMENT_TYPE_LABELS, SESSION_KIND_LABELS } from "@/lib/labels";
-import type { Assessment, CalendarEvent, ClassSession, ISODate, Todo } from "@/types";
+import { ASSESSMENT_TYPE_LABELS, CLUB_EVENT_LABELS, SESSION_KIND_LABELS } from "@/lib/labels";
+import type { Assessment, CalendarEvent, ClassSession, ClubEvent, ISODate, Todo } from "@/types";
 
 export type CalendarItem = {
   key: string;
@@ -27,16 +27,18 @@ export type CalendarItem = {
   | { source: "todo"; item: Todo }
   | { source: "event"; item: CalendarEvent }
   | { source: "session"; item: ClassSession }
+  | { source: "club"; item: ClubEvent }
 );
 
 export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | undefined {
   return useLiveQuery(async () => {
-    const [assessments, todos, events, courses, sessions] = await Promise.all([
+    const [assessments, todos, events, courses, sessions, clubEvents] = await Promise.all([
       db.assessments.where("dueDate").between(from, to, true, true).toArray(),
       db.todos.where("dueDate").between(from, to, true, true).toArray(),
       db.events.where("date").between(from, to, true, true).toArray(),
       db.courses.toArray(),
       db.classSessions.toArray(),
+      db.clubEvents.where("date").between(from, to, true, true).toArray(),
     ]);
     const courseMap = new Map(courses.map((c) => [c.id, c]));
 
@@ -81,6 +83,22 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
           title: e.title,
           label: "Etkinlik",
           dot: "bg-fuchsia-400",
+          done: false,
+          important: false,
+          recurring: false,
+        }),
+      ),
+      ...clubEvents.map(
+        (c): CalendarItem => ({
+          key: `c-${c.id}`,
+          source: "club",
+          item: c,
+          date: c.date,
+          time: c.time,
+          endTime: c.endTime,
+          title: c.title,
+          label: `Kulüp · ${CLUB_EVENT_LABELS[c.type]}`,
+          dot: "bg-ink-900",
           done: false,
           important: false,
           recurring: false,

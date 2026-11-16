@@ -88,6 +88,34 @@ export interface CalendarEvent {
   createdAt: number;
 }
 
+// ---------- Kulüp ----------
+export type ClubEventType = "etkinlik" | "turnuva" | "toplanti" | "antrenman" | "diger";
+
+/** Kulüp etkinliği (takvimde de görünür) */
+export interface ClubEvent {
+  id: ID;
+  title: string;
+  type: ClubEventType;
+  date: ISODate;
+  time?: TimeStr;
+  endTime?: TimeStr;
+  location?: string;
+  notes?: string;
+  createdAt: number;
+}
+
+export type ClubNoteTag = "duyuru" | "karar" | "not" | "sorun";
+
+/** Kulüpte olup bitenlerin kaydı: duyuru, karar, not, sorun */
+export interface ClubNote {
+  id: ID;
+  text: string;
+  tag: ClubNoteTag;
+  date: ISODate;
+  pinned: boolean;
+  createdAt: number;
+}
+
 // ---------- Bütçe ----------
 export interface ExpenseCategory {
   id: ID;

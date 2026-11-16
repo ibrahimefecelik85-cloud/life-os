@@ -2,7 +2,7 @@
 // Seçili günün detayı: o günkü tüm kayıtlar + hızlı ekleme butonları
 import type { ReactNode } from "react";
 import { parseISO } from "date-fns";
-import { CalendarPlus, ClipboardList, GraduationCap, ListTodo } from "lucide-react";
+import { CalendarPlus, ClipboardList, GraduationCap, ListTodo, Swords } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/misc";
@@ -16,7 +16,7 @@ function PlainSection({ children }: { children: ReactNode }) {
   return <div className="border-t border-ink-900/50 pt-3">{children}</div>;
 }
 
-export type AddKind = "event" | "assessment" | "todo";
+export type AddKind = "event" | "assessment" | "todo" | "club";
 
 export function DayDetails({
   date,
@@ -77,7 +77,7 @@ export function DayDetails({
         </ul>
       )}
 
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
         <Button variant="secondary" size="sm" onClick={() => onAdd("event")}>
           <CalendarPlus size={14} /> Etkinlik
         </Button>
@@ -86,6 +86,9 @@ export function DayDetails({
         </Button>
         <Button variant="secondary" size="sm" onClick={() => onAdd("todo")}>
           <ListTodo size={14} /> Görev
+        </Button>
+        <Button variant="secondary" size="sm" onClick={() => onAdd("club")}>
+          <Swords size={14} /> Kulüp
         </Button>
       </div>
     </Wrapper>

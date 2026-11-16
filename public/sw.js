@@ -6,9 +6,9 @@
 // Başka sitelere giden istekler (ör. hava durumu) hiç önbelleğe alınmaz.
 //
 // Bu dosyayı değiştirince VERSION'ı artır: eski önbellek temizlenir.
-const VERSION = "v1";
+const VERSION = "v2";
 const CACHE = `life-os-${VERSION}`;
-const PAGES = ["/", "/takvim", "/dersler", "/yapilacaklar", "/butce", "/rutin", "/ayarlar"];
+const PAGES = ["/", "/takvim", "/dersler", "/yapilacaklar", "/butce", "/rutin", "/kulup", "/ayarlar"];
 
 // Kurulumda: tüm sayfaları VE her sayfanın kullandığı JS/CSS dosyalarını önceden kaydet.
 // Böylece hiç açılmamış bir sekme bile internetsiz çalışır.
