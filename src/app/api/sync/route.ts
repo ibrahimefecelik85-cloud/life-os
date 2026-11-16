@@ -10,9 +10,17 @@ export const dynamic = "force-dynamic";
 const MAX_CHANGES = 5000;
 const MAX_RECORD_BYTES = 50_000;
 
-/** Şifre karşılaştırması (süre farkından şifre tahmin edilemesin diye sabit zamanlı) */
+/** Şifre karşılaştırması (süre farkından şifre tahmin edilemesin diye sabit zamanlı).
+ *  Baştaki/sondaki boşluklar ve Vercel'e yanlışlıkla eklenen tırnaklar yok sayılır. */
+const clean = (s: string) => s.trim().replace(/^["']|["']$/g, "").trim();
+
 function passwordOk(given: string | null): boolean {
-  const expected = process.env.SYNC_PASSWORD;
+  const expected = process.env.SYNC_PASSWORD ? clean(process.env.SYNC_PASSWORD) : "";
+  try {
+    given = given ? clean(decodeURIComponent(given)) : ""; // cihaz şifreyi kodlayarak gönderir
+  } catch {
+    return false;
+  }
   if (!expected || !given) return false;
   const a = createHash("sha256").update(given).digest();
   const b = createHash("sha256").update(expected).digest();

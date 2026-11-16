@@ -56,7 +56,15 @@ export function SyncSettings() {
             girdiğin şifredir.
           </p>
           <Field label="Senkron şifresi">
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+            />
           </Field>
           <Button type="submit" className="w-full" disabled={busy || !password}>
             <Cloud size={16} /> {busy ? "Bağlanıyor..." : "Bağlan"}

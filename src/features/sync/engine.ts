@@ -80,7 +80,8 @@ async function readLocal(): Promise<Map<string, { data: Record<string, unknown>;
 async function request(password: string, since: number, changes: SyncChange[]): Promise<SyncResponse> {
   const res = await fetch("/api/sync", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-sync-password": password },
+    // Türkçe harfler (ş, ğ, ı...) başlıkta bozulmasın diye kodlanarak gönderilir
+    headers: { "Content-Type": "application/json", "x-sync-password": encodeURIComponent(password) },
     body: JSON.stringify({ since, changes }),
   });
   const body = await res.json().catch(() => ({}));
