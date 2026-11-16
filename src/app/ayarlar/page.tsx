@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { clearAllData, exportData, importData } from "@/features/backup/backup";
+import { NotificationSettings } from "@/features/notifications/NotificationSettings";
 
 export default function AyarlarPage() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -38,6 +39,8 @@ export default function AyarlarPage() {
       <PageHeader title="Ayarlar" />
 
       <div className="space-y-4">
+        <NotificationSettings />
+
         <Card title="Yedekleme">
           <p className="mb-3 text-sm text-ink-600">
             Verilerin sadece bu cihazın tarayıcısında saklanıyor. Tarayıcı verilerini silersen kaybolur, o yüzden ara sıra

@@ -54,6 +54,17 @@ src/
 └── types/               # Veri tipleri
 ```
 
+## Rutin bildirimleri (iPhone)
+
+Saati gelen ve tiklenmemiş rutinler için telefona bildirim gider; tiklenen rutin için o gün bir daha gitmez.
+Akış: telefon → `/api/push/sync` (rutinler + bugün tiklenenler) → Upstash Redis ← `/api/push/cron` (cron-job.org, 15 dk'da bir) → Web Push.
+
+Kurulum (bir kerelik):
+1. Vercel → proje → **Storage** → **Upstash for Redis** oluştur ve projeye bağla (`KV_REST_API_URL`, `KV_REST_API_TOKEN` kendiliğinden eklenir).
+2. `npx web-push generate-vapid-keys` ile anahtar üret; Vercel → **Settings → Environment Variables**'a `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`, `CRON_SECRET` ekle (bkz. `.env.example`). Sonra **Redeploy**.
+3. cron-job.org'da 15 dakikada bir `https://<adres>/api/push/cron` çağıran bir iş oluştur, başlık: `Authorization: Bearer <CRON_SECRET>`.
+4. iPhone: Safari → Paylaş → Ana Ekrana Ekle → uygulamayı ana ekrandan aç → Ayarlar → **Bildirimleri aç** → **Deneme bildirimi**.
+
 ## Yeni bir sekme eklemek
 
 1. `src/types/index.ts` içine veri tipini ekle.
@@ -66,4 +77,4 @@ src/
 
 - [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin, aylık takvim
 - [x] **Aşama 2:** Bütçe (harcama girişi, kategoriler, aylık limit, kategori ve günlük grafikler)
-- [ ] **Aşama 3:** Kulüp ✅, PWA (telefona yükleme) ✅, rutin bildirimleri (iPhone), Vercel deploy
+- [ ] **Aşama 3:** Kulüp ✅, PWA (telefona yükleme) ✅, rutin bildirimleri ✅ (kurulum gerekli), Vercel deploy

@@ -4,6 +4,7 @@ import { Geist } from "next/font/google";
 import { AppMain } from "@/components/layout/AppMain";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
+import { PushSync } from "@/features/notifications/PushSync";
 import "./globals.css";
 
 const geist = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AppMain>{children}</AppMain>
         <BottomNav />
         <ServiceWorker />
+        <PushSync />
       </body>
     </html>
   );

@@ -3,10 +3,11 @@
 //   - /_next/static/* (adında sürüm olan dosyalar): önce önbellek (hiç değişmezler)
 //   - Sayfalar: önce ağ, internet yoksa önbellekteki son sürüm
 //   - Diğer kendi dosyalarımız (ikonlar vb.): önbellek varsa onu ver, arkada güncelle
-// Başka sitelere giden istekler (ör. hava durumu) hiç önbelleğe alınmaz.
+// Başka sitelere giden istekler (ör. hava durumu) ve /api/ istekleri hiç önbelleğe alınmaz.
+// En altta: telefona gelen bildirimleri gösterme ve bildirime dokununca uygulamayı açma.
 //
 // Bu dosyayı değiştirince VERSION'ı artır: eski önbellek temizlenir.
-const VERSION = "v2";
+const VERSION = "v3";
 const CACHE = `life-os-${VERSION}`;
 const PAGES = ["/", "/takvim", "/dersler", "/yapilacaklar", "/butce", "/rutin", "/kulup", "/ayarlar"];
 
@@ -49,6 +50,7 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // başka siteler: dokunma
+  if (url.pathname.startsWith("/api/")) return; // sunucu uç noktaları her zaman canlı
 
   // Sürümlü statik dosyalar: önce önbellek
   if (url.pathname.startsWith("/_next/static/")) {
@@ -88,6 +90,44 @@ self.addEventListener("fetch", (event) => {
         })
         .catch(() => hit);
       return hit || network;
+    }),
+  );
+});
+
+// ---- Bildirimler ----
+// Sunucu (cron) bildirim gönderince burası çalışır ve bildirimi gösterir.
+self.addEventListener("push", (event) => {
+  let data = { title: "Life OS", body: "", url: "/", tag: "life-os" };
+  try {
+    data = { ...data, ...event.data.json() };
+  } catch {
+    if (event.data) data.body = event.data.text();
+  }
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      tag: data.tag, // aynı etiketli eski bildirimin yerine geçer (bildirim yığılmaz)
+      renotify: true,
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png",
+      data: { url: data.url },
+    }),
+  );
+});
+
+// Bildirime dokununca: açık bir pencere varsa ona geç, yoksa uygulamayı aç
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = new URL(event.notification.data?.url || "/", self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
+      for (const c of list) {
+        if ("focus" in c) {
+          c.navigate(target);
+          return c.focus();
+        }
+      }
+      return self.clients.openWindow(target);
     }),
   );
 });
