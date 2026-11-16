@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { clearAllData, exportData, importData } from "@/features/backup/backup";
 import { NotificationSettings } from "@/features/notifications/NotificationSettings";
+import { SyncSettings } from "@/features/sync/SyncSettings";
 
 export default function AyarlarPage() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -26,7 +27,7 @@ export default function AyarlarPage() {
   }
 
   async function handleClear() {
-    if (!confirm("TÜM veriler silinecek. Emin misin?")) return;
+    if (!confirm("TÜM veriler silinecek. Bulut senkronu açıksa diğer cihazlarından da silinir. Emin misin?")) return;
     await clearAllData();
     setMessage({ ok: true, text: "Tüm veriler silindi." });
   }
@@ -39,6 +40,7 @@ export default function AyarlarPage() {
       <PageHeader title="Ayarlar" />
 
       <div className="space-y-4">
+        <SyncSettings />
         <NotificationSettings />
 
         <Card title="Yedekleme">

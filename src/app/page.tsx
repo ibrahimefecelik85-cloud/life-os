@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { CalendarDays, Settings } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
+import { SyncIndicator } from "@/features/sync/SyncIndicator";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { useNow } from "@/hooks/useNow";
@@ -35,6 +36,8 @@ export default function TodayPage() {
           <Logo size={34} />
           <span className="text-lg font-bold tracking-tight text-ink-950">Life OS</span>
         </div>
+        <div className="flex items-center">
+        <SyncIndicator />
         <Link
           href="/ayarlar"
           aria-label="Ayarlar"
@@ -42,6 +45,7 @@ export default function TodayPage() {
         >
           <Settings size={20} />
         </Link>
+        </div>
       </div>
       <PageHeader title={now ? greeting(now.getHours()) : "Bugün"} subtitle={now ? formatLong(now) : "\u00a0"} />
 

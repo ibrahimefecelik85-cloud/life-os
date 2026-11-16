@@ -5,6 +5,7 @@ import { AppMain } from "@/components/layout/AppMain";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
 import { PushSync } from "@/features/notifications/PushSync";
+import { SyncManager } from "@/features/sync/SyncManager";
 import "./globals.css";
 
 const geist = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <BottomNav />
         <ServiceWorker />
         <PushSync />
+        <SyncManager />
       </body>
     </html>
   );

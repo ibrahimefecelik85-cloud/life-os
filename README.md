@@ -54,6 +54,15 @@ src/
 └── types/               # Veri tipleri
 ```
 
+## Bulut senkronizasyonu (telefon ↔ bilgisayar)
+
+Veriler cihazda (IndexedDB) durur, uygulama internetsiz çalışır; her değişiklik birkaç saniye içinde Upstash Redis'e gider,
+diğer cihaz açılışta ve açıkken 30 sn'de bir değişiklikleri çeker. Çakışmada son kaydedilen kazanır.
+Kod: `src/features/sync/engine.ts` (cihaz), `src/app/api/sync/route.ts` + `src/lib/sync/` (sunucu).
+
+Kurulum: Vercel'e `SYNC_PASSWORD` ekle → Redeploy → **önce en güncel verinin olduğu cihazda** Ayarlar → Bulut senkronizasyonu → Bağlan
+(bulut boşsa veriler yüklenir), sonra diğer cihazda Bağlan (buluttakiler o cihaza alınır).
+
 ## Rutin bildirimleri (iPhone)
 
 Saati gelen ve tiklenmemiş rutinler için telefona bildirim gider; tiklenen rutin için o gün bir daha gitmez.
