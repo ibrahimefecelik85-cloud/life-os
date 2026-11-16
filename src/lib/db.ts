@@ -6,10 +6,22 @@
 // Not: IndexedDB true/false değerlerini indeksleyemez, o yüzden "done" alanlarını
 // indekse koymuyoruz; filtrelemeyi JavaScript'te yapıyoruz (veri küçük, sorun değil).
 import Dexie, { type EntityTable, type Transaction } from "dexie";
-import type { Assessment, CalendarEvent, ClassSession, Course, Habit, HabitLog, Todo } from "@/types";
+import type {
+  Assessment,
+  CalendarEvent,
+  ClassSession,
+  Course,
+  Expense,
+  ExpenseCategory,
+  Habit,
+  HabitLog,
+  Setting,
+  Todo,
+} from "@/types";
 import { newId } from "./id";
 import { seedFall2026 } from "./seed/fall2026";
 import { seedWolves } from "./seed/wolves";
+import { seedBudgetCategories } from "./seed/budget";
 
 class LifeOSDB extends Dexie {
   courses!: EntityTable<Course, "id">;
@@ -19,6 +31,9 @@ class LifeOSDB extends Dexie {
   habits!: EntityTable<Habit, "id">;
   habitLogs!: EntityTable<HabitLog, "id">;
   events!: EntityTable<CalendarEvent, "id">;
+  expenses!: EntityTable<Expense, "id">;
+  expenseCategories!: EntityTable<ExpenseCategory, "id">;
+  settings!: EntityTable<Setting, "key">;
 
   constructor() {
     super("life-os");
@@ -55,11 +70,21 @@ class LifeOSDB extends Dexie {
       .stores({})
       .upgrade((tx) => seedWolves(tx));
 
+    // Sürüm 6: bütçe (harcamalar, kategoriler) ve genel ayarlar
+    this.version(6)
+      .stores({
+        expenses: "id, date, categoryId",
+        expenseCategories: "id, order",
+        settings: "key",
+      })
+      .upgrade((tx) => seedBudgetCategories(tx));
+
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
     this.on("populate", async (tx) => {
       await seedFall2026(tx); // dersler + program + sınavlar
       await seedWolves(tx);
       await seedHabits(tx);
+      await seedBudgetCategories(tx);
     });
   }
 }
@@ -89,4 +114,15 @@ function seedHabits(tx: Transaction) {
 export const db = new LifeOSDB();
 
 /** Yedekleme için tüm tabloların listesi */
-export const ALL_TABLES = ["courses", "classSessions", "assessments", "todos", "habits", "habitLogs", "events"] as const;
+export const ALL_TABLES = [
+  "courses",
+  "classSessions",
+  "assessments",
+  "todos",
+  "habits",
+  "habitLogs",
+  "events",
+  "expenses",
+  "expenseCategories",
+  "settings",
+] as const;

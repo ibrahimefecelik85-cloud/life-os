@@ -88,6 +88,30 @@ export interface CalendarEvent {
   createdAt: number;
 }
 
+// ---------- Bütçe ----------
+export interface ExpenseCategory {
+  id: ID;
+  name: string;
+  emoji: string;
+  order: number;
+}
+
+/** Tek bir harcama. Tutar Türk lirası (TL). */
+export interface Expense {
+  id: ID;
+  amount: number;
+  categoryId: ID;
+  date: ISODate;
+  note?: string;
+  createdAt: number;
+}
+
+/** Genel ayarlar (anahtar → değer), ör. aylık bütçe limiti */
+export interface Setting {
+  key: string;
+  value: unknown;
+}
+
 // ---------- Yapılacaklar ----------
 export type TodoCategory = "okul" | "kulup" | "kisisel";
 

@@ -32,6 +32,9 @@
   --color-brand-900: #3a2717;
   --color-brand-950: #24180e;
 
+  /* Grafik çubukları (bütçe): zemin üzerinde kontrast ve canlılık kontrolünden geçti */
+  --color-chart: #a8652a;
+
   /* Kartlar için yumuşak gölge: shadow-soft */
   --shadow-soft: 0 1px 2px rgb(24 22 20 / 0.04), 0 10px 30px -14px rgb(79 53 30 / 0.18);
 }

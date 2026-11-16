@@ -1,7 +1,7 @@
 # Life OS
 
 Günlük işleri tek yerden yönetmek için kişisel web uygulaması: dersler, ödev/sınav takibi, yapılacaklar,
-hava durumu, günlük rutin ve takvim; sırada bütçe ve kulüp.
+hava durumu, günlük rutin, takvim ve bütçe; sırada kulüp.
 
 **Teknolojiler:** Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Dexie (IndexedDB) · date-fns · lucide-react
 
@@ -35,7 +35,7 @@ src/
 │   ├── takvim/          #   /takvim        Aylık takvim
 │   ├── rutin/           #   /rutin         Günlük rutin yönetimi
 │   ├── yapilacaklar/    #   /yapilacaklar
-│   ├── butce/           #   /butce         (Aşama 2)
+│   ├── butce/           #   /butce         Bütçe
 │   └── ayarlar/         #   /ayarlar       Yedekleme
 ├── components/
 │   ├── ui/              # Genel parçalar: Card, Button, Modal, Form...
@@ -43,6 +43,7 @@ src/
 ├── features/            # Her modül kendi klasöründe
 │   ├── courses/         #   api.ts (veri işlemleri) · hooks.ts (veri okuma) · components/
 │   ├── todos/
+│   ├── budget/          #   harcamalar, kategoriler, grafikler
 │   ├── weather/
 │   ├── today/           #   Bugün ekranının kartları
 │   └── backup/
@@ -62,5 +63,5 @@ src/
 ## Yol haritası
 
 - [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin, aylık takvim
-- [ ] **Aşama 2:** Bütçe
+- [x] **Aşama 2:** Bütçe (harcama girişi, kategoriler, aylık limit, kategori ve günlük grafikler)
 - [ ] **Aşama 3:** Kulüp, PWA (telefona yükleme), rutin bildirimleri (iPhone), Vercel deploy
