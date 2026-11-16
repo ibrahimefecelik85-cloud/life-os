@@ -65,7 +65,8 @@ export function DayDetails({
                   <p className={`truncate ${i.done ? "text-ink-500 line-through" : ""}`}>{i.title}</p>
                   <p className="text-xs text-ink-500">
                     {i.label}
-                    {i.time && ` · ${i.time}`}
+                    {i.time && ` · ${i.time}${i.endTime ? `–${i.endTime}` : ""}`}
+                    {i.recurring && " · her hafta"}
                     {i.done && " · Tamamlandı"}
                   </p>
                 </div>

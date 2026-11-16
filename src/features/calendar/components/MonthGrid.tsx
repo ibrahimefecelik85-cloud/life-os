@@ -39,7 +39,11 @@ export function MonthGrid({
           const isToday = iso === today;
           const isSelected = iso === selected;
           const hasExam = items.some((i) => i.important && !i.done);
-          const visibleDots = items.slice(0, 4);
+          // Önce ödev/sınav/etkinlik/görev, sonra haftalık dersler (yer azsa öncelik onlarda)
+          const deadlines = items.filter((i) => !i.recurring);
+          const sessions = items.filter((i) => i.recurring);
+          const ordered = [...deadlines, ...sessions];
+          const visibleDots = ordered.slice(0, 5);
 
           return (
             <button
@@ -65,14 +69,17 @@ export function MonthGrid({
               {/* Telefon: noktalar */}
               <span className="flex flex-wrap justify-center gap-0.5 sm:hidden">
                 {visibleDots.map((i) => (
-                  <span key={i.key} className={`h-1.5 w-1.5 rounded-full ${i.dot} ${i.done ? "opacity-30" : ""}`} />
+                  <span
+                    key={i.key}
+                    className={`rounded-full ${i.dot} ${i.recurring ? "h-1 w-1 self-center opacity-50" : "h-1.5 w-1.5"} ${i.done ? "opacity-30" : ""}`}
+                  />
                 ))}
-                {items.length > 4 && <span className="text-[9px] leading-none text-ink-500">+{items.length - 4}</span>}
+                {ordered.length > 5 && <span className="text-[9px] leading-none text-ink-500">+{ordered.length - 5}</span>}
               </span>
 
               {/* Geniş ekran: kısa başlıklar */}
               <span className="hidden w-full space-y-0.5 sm:block">
-                {items.slice(0, maxTitles).map((i) => (
+                {deadlines.slice(0, maxTitles).map((i) => (
                   <span
                     key={i.key}
                     className={`flex items-center gap-1 truncate text-left text-[10px] ${i.done ? "text-ink-400 line-through" : "text-ink-700"}`}
@@ -81,8 +88,16 @@ export function MonthGrid({
                     <span className="truncate">{i.title}</span>
                   </span>
                 ))}
-                {items.length > maxTitles && (
-                  <span className="block text-[10px] text-ink-500">+{items.length - maxTitles} daha</span>
+                {deadlines.length > maxTitles && (
+                  <span className="block text-[10px] text-ink-500">+{deadlines.length - maxTitles} daha</span>
+                )}
+                {/* Haftalık dersler/idman: başlık yerine soluk noktalar */}
+                {sessions.length > 0 && (
+                  <span className="flex gap-0.5 pt-0.5">
+                    {sessions.map((i) => (
+                      <span key={i.key} className={`h-1.5 w-1.5 rounded-full opacity-50 ${i.dot}`} title={`${i.time} ${i.title}`} />
+                    ))}
+                  </span>
                 )}
               </span>
 

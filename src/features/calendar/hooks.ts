@@ -4,33 +4,39 @@
 //   1) CalendarItem["source"] tipine yeni bir değer ekle
 //   2) useCalendarItems içinde o tablodan veriyi okuyup listeye ekle
 import { useLiveQuery } from "dexie-react-hooks";
+import { eachDayOfInterval, parseISO } from "date-fns";
 import { db } from "@/lib/db";
 import { courseColor } from "@/lib/colors";
-import { ASSESSMENT_TYPE_LABELS } from "@/lib/labels";
-import type { Assessment, CalendarEvent, ISODate, Todo } from "@/types";
+import { toISODate, weekdayOf } from "@/lib/dates";
+import { ASSESSMENT_TYPE_LABELS, SESSION_KIND_LABELS } from "@/lib/labels";
+import type { Assessment, CalendarEvent, ClassSession, ISODate, Todo } from "@/types";
 
 export type CalendarItem = {
   key: string;
   date: ISODate;
   time?: string;
+  endTime?: string; // ders/idman gibi saat aralığı olanlar için
   title: string;
   label: string; // "Sınav", "Görev", "Etkinlik"...
   dot: string; // Tailwind renk sınıfı
   done: boolean;
   important: boolean; // sınav gibi öne çıkması gerekenler
+  recurring: boolean; // haftalık programdan gelen (ders, idman) — takvimde soluk gösterilir
 } & (
   | { source: "assessment"; item: Assessment }
   | { source: "todo"; item: Todo }
   | { source: "event"; item: CalendarEvent }
+  | { source: "session"; item: ClassSession }
 );
 
 export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | undefined {
   return useLiveQuery(async () => {
-    const [assessments, todos, events, courses] = await Promise.all([
+    const [assessments, todos, events, courses, sessions] = await Promise.all([
       db.assessments.where("dueDate").between(from, to, true, true).toArray(),
       db.todos.where("dueDate").between(from, to, true, true).toArray(),
       db.events.where("date").between(from, to, true, true).toArray(),
       db.courses.toArray(),
+      db.classSessions.toArray(),
     ]);
     const courseMap = new Map(courses.map((c) => [c.id, c]));
 
@@ -48,6 +54,7 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
           dot: courseColor(course?.color).dot,
           done: a.done,
           important: a.type === "sinav",
+          recurring: false,
         };
       }),
       ...todos.map(
@@ -61,6 +68,7 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
           dot: "bg-ink-600",
           done: t.done,
           important: false,
+          recurring: false,
         }),
       ),
       ...events.map(
@@ -75,9 +83,34 @@ export function useCalendarItems(from: ISODate, to: ISODate): CalendarItem[] | u
           dot: "bg-fuchsia-400",
           done: false,
           important: false,
+          recurring: false,
         }),
       ),
     ];
+
+    // Haftalık program (ders, PS, lab, idman): aralıktaki her güne o günün saatlerini yerleştir
+    const byWeekday = new Map<number, ClassSession[]>();
+    for (const s of sessions) byWeekday.set(s.weekday, [...(byWeekday.get(s.weekday) ?? []), s]);
+    for (const day of eachDayOfInterval({ start: parseISO(from), end: parseISO(to) })) {
+      const date = toISODate(day);
+      for (const s of byWeekday.get(weekdayOf(day)) ?? []) {
+        const course = courseMap.get(s.courseId);
+        items.push({
+          key: `s-${s.id}-${date}`,
+          source: "session",
+          item: s,
+          date,
+          time: s.start,
+          endTime: s.end,
+          title: course?.code ?? "?",
+          label: SESSION_KIND_LABELS[s.kind],
+          dot: courseColor(course?.color).dot,
+          done: false,
+          important: false,
+          recurring: true,
+        });
+      }
+    }
 
     // Gün içinde: önce saatliler (saate göre), sonra saatsizler
     return items.sort(
