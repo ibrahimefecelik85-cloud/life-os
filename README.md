@@ -77,4 +77,4 @@ Kurulum (bir kerelik):
 
 - [x] **Aşama 1:** Kurulum, Bugün ekranı, Dersler, Yapılacaklar, hava durumu, yedekleme, günlük rutin, aylık takvim
 - [x] **Aşama 2:** Bütçe (harcama girişi, kategoriler, aylık limit, kategori ve günlük grafikler)
-- [ ] **Aşama 3:** Kulüp ✅, PWA (telefona yükleme) ✅, rutin bildirimleri ✅ (kurulum gerekli), Vercel deploy
+- [x] **Aşama 3:** Kulüp, PWA (telefona yükleme), rutin bildirimleri (iPhone), Vercel deploy
