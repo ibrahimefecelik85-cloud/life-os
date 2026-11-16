@@ -9,11 +9,27 @@ export async function exportData(): Promise<void> {
   for (const name of ALL_TABLES) tables[name] = await db.table(name).toArray();
 
   const payload = { format: FORMAT, version: 1, exportedAt: new Date().toISOString(), tables };
+  const name = `life-os-yedek-${new Date().toISOString().slice(0, 10)}.json`;
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+
+  // Telefonda (özellikle iPhone'da ana ekrandan açılan uygulamada) dosya indirme çalışmayabilir:
+  // paylaşım menüsü varsa onu aç → "Dosyalar'a Kaydet", WhatsApp, Mail...
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const file = new File([blob], name, { type: "application/json" });
+  if (isMobile && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: "Life OS yedeği" });
+      return;
+    } catch (e) {
+      if (e instanceof DOMException && e.name === "AbortError") return; // kullanıcı vazgeçti
+      // paylaşım başarısızsa aşağıdaki normal indirmeyi dene
+    }
+  }
+
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `life-os-yedek-${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = name;
   a.click();
   URL.revokeObjectURL(url);
 }

@@ -48,7 +48,7 @@ export default function AyarlarPage() {
           </p>
           <div className="flex flex-col gap-2 sm:flex-row">
             <Button onClick={exportData} className="flex-1">
-              <Download size={16} /> Yedeği indir
+              <Download size={16} /> Yedeği kaydet
             </Button>
             <Button variant="secondary" onClick={() => fileRef.current?.click()} className="flex-1">
               <Upload size={16} /> Yedek yükle
