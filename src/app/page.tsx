@@ -1,7 +1,7 @@
 "use client";
 // Ana ekran: "Bugün"
 // Telefonda tek sütun; bilgisayarda (lg ve üstü) iki sütun:
-//   sol: hava durumu + takvim   |   sağ: yapılacaklar, dersler, rutin, teslimler, antrenman
+//   sol: hava durumu + takvim   |   sağ: yapılacaklar, dersler, rutin, teslimler
 import Link from "next/link";
 import { CalendarDays, Settings } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
@@ -14,7 +14,6 @@ import { CalendarPanel } from "@/features/calendar/components/CalendarPanel";
 import { TodayClasses } from "@/features/today/TodayClasses";
 import { UpcomingCard } from "@/features/today/UpcomingCard";
 import { TodayTodos } from "@/features/today/TodayTodos";
-import { TodayWorkout } from "@/features/today/TodayWorkout";
 import { HabitsCard } from "@/features/habits/components/HabitsCard";
 
 function greeting(h: number) {
@@ -71,7 +70,6 @@ export default function TodayPage() {
             <TodayClasses now={now} />
             <HabitsCard now={now} />
             <UpcomingCard now={now} />
-            <TodayWorkout />
           </div>
         )}
       </div>

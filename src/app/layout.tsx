@@ -12,7 +12,7 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: "Life OS",
-  description: "Dersler, görevler, antrenman ve bütçe tek yerde",
+  description: "Dersler, takvim, görevler ve günlük rutin tek yerde",
 };
 
 export const viewport: Viewport = {

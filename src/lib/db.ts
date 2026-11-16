@@ -9,6 +9,7 @@ import Dexie, { type EntityTable, type Transaction } from "dexie";
 import type { Assessment, CalendarEvent, ClassSession, Course, Habit, HabitLog, Todo } from "@/types";
 import { newId } from "./id";
 import { seedFall2026 } from "./seed/fall2026";
+import { seedWolves } from "./seed/wolves";
 
 class LifeOSDB extends Dexie {
   courses!: EntityTable<Course, "id">;
@@ -49,9 +50,15 @@ class LifeOSDB extends Dexie {
       .stores({})
       .upgrade((tx) => seedFall2026(tx));
 
+    // Sürüm 5: Wolves idmanı (Çar, Cum 21–23 · Paz 19–21)
+    this.version(5)
+      .stores({})
+      .upgrade((tx) => seedWolves(tx));
+
     // Veritabanı ilk kez oluşturulduğunda başlangıç verilerini ekle
     this.on("populate", async (tx) => {
       await seedFall2026(tx); // dersler + program + sınavlar
+      await seedWolves(tx);
       await seedHabits(tx);
     });
   }

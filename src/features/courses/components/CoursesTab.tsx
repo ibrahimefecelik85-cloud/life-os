@@ -33,7 +33,7 @@ export function CoursesTab() {
             <span className={`h-10 w-1.5 rounded-full ${color.dot}`} />
             <div className="min-w-0 flex-1">
               <p className={`font-semibold ${color.text}`}>{c.code}</p>
-              <p className="truncate text-sm text-ink-700">{c.name ?? "Ders adı eklenmedi"}</p>
+              <p className="truncate text-sm text-ink-700">{c.name ?? (c.type === "aktivite" ? "Aktivite" : "Ders adı eklenmedi")}</p>
               <p className="text-xs text-ink-500">
                 {mins > 0 ? `Haftada ${(mins / 60).toLocaleString("tr-TR", { maximumFractionDigits: 1 })} saat` : "Programa eklenmedi"}
                 {pending > 0 && ` · ${pending} bekleyen teslim`}

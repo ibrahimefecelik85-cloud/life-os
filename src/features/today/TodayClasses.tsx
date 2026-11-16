@@ -16,7 +16,7 @@ export function TodayClasses({ now }: { now: Date }) {
 
   return (
     <Card
-      title="Bugünkü dersler"
+      title="Bugünkü program"
       icon={<GraduationCap size={16} />}
       action={
         <Link href="/dersler" className="text-xs text-brand-600">
@@ -25,7 +25,7 @@ export function TodayClasses({ now }: { now: Date }) {
       }
     >
       {sessions === undefined ? null : sessions.length === 0 ? (
-        <EmptyState text="Bugün ders yok." />
+        <EmptyState text="Bugün ders veya idman yok." />
       ) : (
         <ul className="space-y-2">
           {sessions.map((s) => {

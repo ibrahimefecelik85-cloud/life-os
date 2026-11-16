@@ -3,9 +3,9 @@ import { useState, type FormEvent } from "react";
 import { Trash2 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
-import { Field, Input } from "@/components/ui/Form";
+import { ChoiceGroup, Field, Input } from "@/components/ui/Form";
 import { COLOR_KEYS, COURSE_COLORS, type ColorKey } from "@/lib/colors";
-import type { Course } from "@/types";
+import type { Course, CourseType } from "@/types";
 import { addCourse, deleteCourse, updateCourse } from "../api";
 
 /** Ders ekleme/düzenleme penceresi. `initial` verilirse düzenleme modunda açılır. */
@@ -14,14 +14,17 @@ export function CourseFormModal({ initial, onClose }: { initial?: Course; onClos
   const [name, setName] = useState(initial?.name ?? "");
   const [instructor, setInstructor] = useState(initial?.instructor ?? "");
   const [color, setColor] = useState<ColorKey>(initial?.color ?? "sky");
+  const [type, setType] = useState<CourseType>(initial?.type ?? "ders");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const data = {
-      code: code.trim().toUpperCase(),
+      // Aktivite adlarını (ör. "Wolves") büyük harfe çevirme
+      code: type === "ders" ? code.trim().toUpperCase() : code.trim(),
       name: name.trim() || undefined,
       instructor: instructor.trim() || undefined,
       color,
+      type,
     };
     if (initial) await updateCourse(initial.id, data);
     else await addCourse(data);
@@ -38,13 +41,23 @@ export function CourseFormModal({ initial, onClose }: { initial?: Course; onClos
   return (
     <Modal open onClose={onClose} title={initial ? "Dersi düzenle" : "Yeni ders"}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Field label="Ders kodu">
-          <Input value={code} onChange={(e) => setCode(e.target.value)} placeholder="CE 112" required autoFocus={!initial} />
+        <Field label="Tür" group>
+          <ChoiceGroup
+            value={type}
+            options={[
+              { value: "ders", label: "Ders" },
+              { value: "aktivite", label: "Aktivite (idman, kulüp...)" },
+            ]}
+            onChange={setType}
+          />
         </Field>
-        <Field label="Ders adı (isteğe bağlı)">
+        <Field label={type === "ders" ? "Ders kodu" : "Ad"}>
+          <Input value={code} onChange={(e) => setCode(e.target.value)} placeholder={type === "ders" ? "CE 112" : "Wolves"} required autoFocus={!initial} />
+        </Field>
+        <Field label={type === "ders" ? "Ders adı (isteğe bağlı)" : "Açıklama (isteğe bağlı)"}>
           <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Statik" />
         </Field>
-        <Field label="Hoca (isteğe bağlı)">
+        <Field label={type === "ders" ? "Hoca (isteğe bağlı)" : "Antrenör / sorumlu (isteğe bağlı)"}>
           <Input value={instructor} onChange={(e) => setInstructor(e.target.value)} />
         </Field>
         <Field label="Renk" group>

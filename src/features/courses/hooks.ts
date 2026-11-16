@@ -12,6 +12,12 @@ export function useCourses(): Course[] | undefined {
   return useLiveQuery(() => db.courses.orderBy("code").toArray());
 }
 
+/** Sadece okul dersleri (aktiviteler hariç) — ödev/sınav eklerken kullanılır */
+export function useAcademicCourses(): Course[] | undefined {
+  const courses = useCourses();
+  return useMemo(() => courses?.filter((c) => c.type !== "aktivite"), [courses]);
+}
+
 /** id → ders eşlemesi (listelerde ders adını/rengini bulmak için) */
 export function useCourseMap(): Map<ID, Course> {
   const courses = useCourses();

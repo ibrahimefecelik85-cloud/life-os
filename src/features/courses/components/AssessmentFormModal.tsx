@@ -8,7 +8,7 @@ import { ASSESSMENT_TYPE_LABELS, PRIORITY_LABELS } from "@/lib/labels";
 import { todayISO } from "@/lib/dates";
 import type { Assessment, AssessmentType, ISODate, Priority } from "@/types";
 import { addAssessment, deleteAssessment, updateAssessment } from "../api";
-import { useCourses } from "../hooks";
+import { useAcademicCourses } from "../hooks";
 
 const TYPE_OPTIONS = (Object.keys(ASSESSMENT_TYPE_LABELS) as AssessmentType[]).map((k) => ({
   value: k,
@@ -29,7 +29,7 @@ export function AssessmentFormModal({
   defaultDate?: ISODate;
   onClose: () => void;
 }) {
-  const courses = useCourses();
+  const courses = useAcademicCourses();
   const [courseId, setCourseId] = useState(initial?.courseId ?? "");
   const [type, setType] = useState<AssessmentType>(initial?.type ?? "odev");
   const [title, setTitle] = useState(initial?.title ?? "");

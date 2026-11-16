@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { ChoiceGroup, Select } from "@/components/ui/Form";
 import { EmptyState } from "@/components/ui/misc";
 import type { Assessment } from "@/types";
-import { useAssessments, useCourseMap, useCourses } from "../hooks";
+import { useAcademicCourses, useAssessments, useCourseMap } from "../hooks";
 import { AssessmentFormModal } from "./AssessmentFormModal";
 import { AssessmentItem } from "./AssessmentItem";
 
@@ -24,7 +24,7 @@ export function AssessmentsTab({ now }: { now: Date }) {
   const [editing, setEditing] = useState<{ item?: Assessment } | null>(null);
 
   const all = useAssessments();
-  const courses = useCourses();
+  const courses = useAcademicCourses();
   const courseMap = useCourseMap();
 
   let list = all ?? [];

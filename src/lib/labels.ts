@@ -24,6 +24,7 @@ export const SESSION_KIND_LABELS: Record<SessionKind, string> = {
   ders: "Ders",
   ps: "PS",
   lab: "Lab",
+  idman: "İdman",
 };
 
 export const TODO_CATEGORY_LABELS: Record<TodoCategory, string> = {

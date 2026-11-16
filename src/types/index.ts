@@ -12,16 +12,20 @@ export type TimeStr = string;
 export type Weekday = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 // ---------- Dersler ----------
+/** "ders": okul dersi · "aktivite": ders dışı düzenli program (ör. Wolves idmanı) */
+export type CourseType = "ders" | "aktivite";
+
 export interface Course {
   id: ID;
-  code: string; // "CE 112"
+  code: string; // "CE 112" veya "Wolves"
   name?: string; // "Statik"
+  type?: CourseType; // boşsa "ders"
   color: ColorKey;
   instructor?: string;
   createdAt: number;
 }
 
-export type SessionKind = "ders" | "ps" | "lab";
+export type SessionKind = "ders" | "ps" | "lab" | "idman";
 
 /** Haftalık programdaki tek bir ders saati */
 export interface ClassSession {

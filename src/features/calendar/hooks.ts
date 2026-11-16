@@ -1,6 +1,6 @@
 "use client";
 // Takvim, farklı modüllerin tarihli verilerini tek tip "CalendarItem" listesine çevirir.
-// Yeni bir kaynak eklemek için (ör. antrenman, kulüp etkinliği):
+// Yeni bir kaynak eklemek için (ör. kulüp etkinliği):
 //   1) CalendarItem["source"] tipine yeni bir değer ekle
 //   2) useCalendarItems içinde o tablodan veriyi okuyup listeye ekle
 import { useLiveQuery } from "dexie-react-hooks";
