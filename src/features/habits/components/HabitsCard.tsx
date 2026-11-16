@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/ui/misc";
 import { toISODate, timeToMinutes } from "@/lib/dates";
 import { computeStreak, groupDoneDates, isScheduledOn, useHabits, useRecentHabitLogs } from "../hooks";
 import { HabitRow } from "./HabitRow";
+import { BlockBanner } from "@/features/block/BlockBanner";
 
 export function HabitsCard({ now }: { now: Date }) {
   const today = toISODate(now);
@@ -35,6 +36,7 @@ export function HabitsCard({ now }: { now: Date }) {
         </Link>
       }
     >
+      <BlockBanner now={now} />
       {habits === undefined || logs === undefined ? null : todays.length === 0 ? (
         <EmptyState text="Bugün için rutin yok." />
       ) : (

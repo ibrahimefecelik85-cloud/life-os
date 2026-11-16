@@ -20,7 +20,10 @@ export function SyncManager() {
     const schedule = () => {
       if (isApplying() || !isSyncConfigured()) return;
       clearTimeout(timer);
-      timer = setTimeout(run, 2000);
+      timer = setTimeout(() => {
+        timer = undefined;
+        run();
+      }, 2000);
     };
 
     // Dexie "hook"ları: herhangi bir tabloda ekleme/güncelleme/silme olunca senkron planla
@@ -31,7 +34,16 @@ export function SyncManager() {
       t.hook("deleting", schedule);
     }
 
-    const onVisible = () => document.visibilityState === "visible" && run();
+    // Öne gelince güncelle; arka plana geçerken bekleyen değişikliği hemen gönder
+    // (ör. rutini tikleyip hemen Instagram'a geçince engel güncel olsun)
+    const onVisible = () => {
+      if (document.visibilityState === "visible") run();
+      else if (timer) {
+        clearTimeout(timer);
+        timer = undefined;
+        run();
+      }
+    };
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("online", run);
     const interval = setInterval(() => document.visibilityState === "visible" && run(), 30_000);

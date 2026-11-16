@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { clearAllData, exportData, importData } from "@/features/backup/backup";
 import { NotificationSettings } from "@/features/notifications/NotificationSettings";
 import { SyncSettings } from "@/features/sync/SyncSettings";
+import { BlockSettings } from "@/features/block/BlockSettings";
 
 export default function AyarlarPage() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -42,6 +43,7 @@ export default function AyarlarPage() {
       <div className="space-y-4">
         <SyncSettings />
         <NotificationSettings />
+        <BlockSettings />
 
         <Card title="Yedekleme">
           <p className="mb-3 text-sm text-ink-600">

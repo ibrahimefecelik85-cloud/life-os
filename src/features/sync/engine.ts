@@ -38,6 +38,8 @@ function saveState(s: LocalSyncState | null) {
 }
 
 export const isSyncConfigured = () => loadState() !== null;
+/** Kestirme adresi için (sadece bu cihazda saklanır) */
+export const getSyncPassword = () => loadState()?.password ?? null;
 export const lastSyncAt = () => loadState()?.lastSyncAt ?? null;
 
 // ---- Durum (arayüz için): kapalı / hazır / senkronize ediliyor / hata ----
